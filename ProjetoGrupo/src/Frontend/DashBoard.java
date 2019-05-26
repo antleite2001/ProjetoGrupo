@@ -6,7 +6,7 @@
 package Frontend;
 
 import Backend.*;
-import javax.swing.BorderFactory;
+import java.awt.Dimension;
 
 /**
  *
@@ -23,8 +23,7 @@ public class DashBoard extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.s = s;
-        this.setTitle("DashBoard - " + s.getCurrentUser().getUserName() + " (" + s.getCurrentUser().getEmail() + ")");
-
+        Validacoes.SetDialogProperties(this, s, 500, 500,"DashBoard" );
     }
 
     /**
@@ -36,7 +35,6 @@ public class DashBoard extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnStatistics = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         menuExit = new javax.swing.JMenuItem();
@@ -62,11 +60,12 @@ public class DashBoard extends javax.swing.JDialog {
         menuEditTasks = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
+        setModal(true);
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnStatistics.setText("Estatisticas");
-        getContentPane().add(btnStatistics, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 540, -1, 40));
+        jMenuBar1.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
 
         jMenu1.setText("Ficheiro");
 
@@ -182,6 +181,11 @@ public class DashBoard extends javax.swing.JDialog {
         jMenu4.add(menuDisplayTaskList);
 
         menuEditTaskList.setText("Editar Lista de Tarefas");
+        menuEditTaskList.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuEditTaskListActionPerformed(evt);
+            }
+        });
         jMenu4.add(menuEditTaskList);
 
         jMenuBar1.add(jMenu4);
@@ -283,7 +287,9 @@ public class DashBoard extends javax.swing.JDialog {
     }//GEN-LAST:event_menuDisplayTasksActionPerformed
 
     private void menuEditTasksActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuEditTasksActionPerformed
-        // TODO add your handling code here:
+        ChangeTask changeTask = new ChangeTask(null, true, s);
+        changeTask.setLocationRelativeTo(null);
+        changeTask.setVisible(true);
     }//GEN-LAST:event_menuEditTasksActionPerformed
 
     private void menuCreateTaskListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCreateTaskListActionPerformed
@@ -308,12 +314,17 @@ public class DashBoard extends javax.swing.JDialog {
         this.dispose();
     }//GEN-LAST:event_menuExitActionPerformed
 
+    private void menuEditTaskListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuEditTaskListActionPerformed
+       ChangeTaskList changeTaskList = new ChangeTaskList(null, true, s);
+        changeTaskList.setLocationRelativeTo(null);
+        changeTaskList.setVisible(true);
+    }//GEN-LAST:event_menuEditTaskListActionPerformed
+
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnStatistics;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;

@@ -62,7 +62,7 @@ public class RepositoryProjects
         r.addUserProjectsAssociation(owner, p.getProjectId(), owner);
 
         
-        System.out.println ("New Project ID: " + p.getProjectId()+" owner "+owner+ " titulo "+titulo+ " descricao "+descricao +" dataInicio "+dataInicio+ " dataFim" + dataFim);
+        //System.out.println ("New Project ID: " + p.getProjectId()+" owner "+owner+ " titulo "+titulo+ " descricao "+descricao +" dataInicio "+dataInicio+ " dataFim" + dataFim);
         Projects.add(p);
         return p.getProjectId(); //return ProjectId
     }

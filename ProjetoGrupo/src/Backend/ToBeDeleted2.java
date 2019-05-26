@@ -26,7 +26,7 @@ public class ToBeDeleted2
     //adicionar utilizador caso este ainda nao exista na lista de utilizadores
     public boolean addUtilizador(String nome, String email, String password){                      
         User u = new User(nome, email, password, getNextuserid());
-        System.out.println ("New User : " + u.getUserName() + "  " +u .getEmail()+"  "+ u.getUserId());
+        //System.out.println ("New User : " + u.getUserName() + "  " +u .getEmail()+"  "+ u.getUserId());
         Utilizadores.add(u);       
         return true;
     }

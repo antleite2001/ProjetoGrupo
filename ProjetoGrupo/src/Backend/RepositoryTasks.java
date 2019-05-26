@@ -13,11 +13,19 @@ public class RepositoryTasks {
     }
 
     //Seletores     
-    public ArrayList<Task> getTarefa() {
+    public ArrayList<Task> getTasks() {
         return this.Tasks;
     }
 
-    //Modificadores
+    public Task getTaskByTaskId(int TaskId) {
+        for (Task t : Tasks) {
+            if (t.getTaskId() == TaskId) {
+                return t;
+            }
+        }
+        return null;
+    }
+
     public ArrayList<Task> getTasksAssignedToUser(int AssignedTo) {
         ArrayList<Task> tasksAssignedToUserId = new ArrayList<>();
         for (Task t : Tasks) {
@@ -29,9 +37,8 @@ public class RepositoryTasks {
     }
 
     public void addTask(int CreatedBy, String Title, String Description, TaskPriority pt, TaskStatus et, Date DataDeInicio, int TaskListId, int assignedTo) {
-        //to show getNextprojectid 
-        Task t = new Task(CreatedBy, assignedTo, Title, Description, pt, et, DataDeInicio, getNextTaskid(),TaskListId);
-        System.out.println("New Project ID: " + t.getTaskId());
+        Task t = new Task(CreatedBy, assignedTo, Title, Description, pt, et, DataDeInicio, getNextTaskid(), TaskListId);
+        System.out.println("New Task ID: " + t.getTaskId());
         Tasks.add(t);
     }
 
@@ -39,7 +46,7 @@ public class RepositoryTasks {
         return ++nextTaskid;
     }
 
-    public void removeTarefa(Task tarefa) {
+    public void removeTask(Task tarefa) {
         Tasks.remove(tarefa);
     }
 

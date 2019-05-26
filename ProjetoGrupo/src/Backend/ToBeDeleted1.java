@@ -25,7 +25,7 @@ public class ToBeDeleted1
     public void addProjeto(int owner, String titulo, String descricao, Date dataInicio, Date dataFim){
         //to show getNextprojectid 
         Project p = new Project(owner, titulo, descricao, dataInicio, dataFim, getNextprojectid());
-        System.out.println ("New Project ID: " + p.getProjectId());
+        //System.out.println ("New Project ID: " + p.getProjectId());
         Projetos.add(p);
         
     }

@@ -31,7 +31,7 @@ public class RepositoryUserProjectsAssociation {
      public int addUserProjectsAssociation(int userid, int projectid, int projectOwner){
          UserProjectsAssociation p = new UserProjectsAssociation (userid, projectid, getNextUserProjectsAssociation(), projectOwner);
          UserProjectsAssociations.add(p);
-        System.out.println("NEW ASSOCIATION userid "+userid+ " projectid "+ projectid+" projectOwner "+ projectOwner + " p.getUserProjectAssociationId() " + p.getUserProjectAssociationId());
+        //System.out.println("NEW ASSOCIATION userid "+userid+ " projectid "+ projectid+" projectOwner "+ projectOwner + " p.getUserProjectAssociationId() " + p.getUserProjectAssociationId());
         return p.getProjectId();
     }
  

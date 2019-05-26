@@ -271,7 +271,7 @@ public class AssociateUserToProjects extends javax.swing.JDialog {
             ProjectId = (Integer) tableProjects.getModel().getValueAt(selectedRow, 0);
             if (!s.getRepositoryUserProjectsAssociation().exists(UserId, ProjectId)) {
                 s.getRepositoryUserProjectsAssociation().addUserProjectsAssociation(UserId, ProjectId, s.getCurrentUser().getUserId());
-                System.out.println("New Association: " +UserId+" " +ProjectId+" " + s.getCurrentUser().getUserId());
+                //System.out.println("New Association: " +UserId+" " +ProjectId+" " + s.getCurrentUser().getUserId());
             }
 
         }
@@ -279,7 +279,7 @@ public class AssociateUserToProjects extends javax.swing.JDialog {
         //Get ProjectId from tableProjects
         /*int ProjectId = (Integer)tableProjects.getModel().getValueAt(tableProjects.getSelectedRow(), 0);
         String ProjectTitle = (String)tableProjects.getModel().getValueAt(tableProjects.getSelectedRow(), 1);
-        System.out.println("ProjectID: " +ProjectId );
+        //System.out.println("ProjectID: " +ProjectId );
 
         //public void addListaDeTarefa(int ProjectId, String Title, String Description, int CreatedBy ){
            s.getTaskListsRepository().addTaskList( ProjectId, tbTaskListTitle.getText(),  tbTaskListDescription.getText(),

@@ -134,8 +134,8 @@ public class ChangeProjectData extends javax.swing.JDialog {
     void UpdateProjectData() {
         tbProjectTitle.setText((String) tableProjects.getModel().getValueAt(tableProjects.getSelectedRow(), 1));
         tbProjectDescription.setText((String) tableProjects.getModel().getValueAt(tableProjects.getSelectedRow(), 2));
-        System.out.println((Date) tableProjects.getModel().getValueAt(tableProjects.getSelectedRow(), 5));
-        System.out.println((Date) tableProjects.getModel().getValueAt(tableProjects.getSelectedRow(), 6));
+        //System.out.println((Date) tableProjects.getModel().getValueAt(tableProjects.getSelectedRow(), 5));
+        //System.out.println((Date) tableProjects.getModel().getValueAt(tableProjects.getSelectedRow(), 6));
         calStartDate.setDate((Date) tableProjects.getModel().getValueAt(tableProjects.getSelectedRow(), 5));
         calEndDate.setDate((Date) tableProjects.getModel().getValueAt(tableProjects.getSelectedRow(), 6));
     }

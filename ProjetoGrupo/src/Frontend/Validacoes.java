@@ -1,10 +1,13 @@
 package Frontend;
 
+import Backend.Sistema;
+import java.awt.Dimension;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.swing.JDialog;
 
 public class Validacoes {
 
@@ -22,4 +25,12 @@ public class Validacoes {
         return dateFormat.format(date);
     }
 
+    
+    public static void SetDialogProperties(JDialog dialog, Sistema s, int sizeX, int sizeY, String menuText)
+    {        
+        dialog.setSize(new Dimension(sizeX, sizeY)); 
+        dialog.setResizable(false);   
+        dialog.setTitle(menuText +  " - "+ s.getCurrentUser().getUserName() + " (" + s.getCurrentUser().getEmail() + ")");
+
+    }
 }

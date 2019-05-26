@@ -286,7 +286,7 @@ public class CreateTaskLists extends javax.swing.JDialog {
         //Get ProjectId from tableProjects
         int ProjectId = (Integer)tableProjects.getModel().getValueAt(tableProjects.getSelectedRow(), 0);
         String ProjectTitle = (String)tableProjects.getModel().getValueAt(tableProjects.getSelectedRow(), 1);
-        System.out.println("ProjectID: " +ProjectId );
+        //System.out.println("ProjectID: " +ProjectId );
         
          //public void addListaDeTarefa(int ProjectId, String Title, String Description, int CreatedBy ){
         s.getRepositoryTaskLists().addTaskList( ProjectId, tbTaskListTitle.getText(),  tbTaskListDescription.getText(), s.getCurrentUser().getUserId() );

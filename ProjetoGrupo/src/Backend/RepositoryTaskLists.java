@@ -20,11 +20,47 @@ public class RepositoryTaskLists {
     public RepositoryTaskLists(){        
         this.ListaDeTarefas = new ArrayList< >();
     }
-    
-    
+    public ArrayList <TaskList> getTaskListsbyOwner(int ownerid){
+        ArrayList <TaskList> lt = new ArrayList <>();
+      
+        for (TaskList t : ListaDeTarefas)
+        {
+            if (t.getCreatedBy()==ownerid)
+            {
+                lt.add(t);
+            }
+        }
+        return lt;
+    }
+   
+    public void updatebytasklistid (int tasklistid, String newtitle, String newdescription)
+    {
+        for (TaskList tl : ListaDeTarefas)
+        {
+            if (tl.getTaskListId()==tasklistid)
+            {
+                tl.setTitle(newtitle);
+                tl.setDescription(newdescription);
+                return;
+            }
+        }
+    }
+
+    public TaskList getTaskListByTaskId(int TaskListId)
+   {
+    for(TaskList tl:ListaDeTarefas)  
+    {
+        if(tl.getTaskListId()==TaskListId)
+        {
+            return tl;
+        }
+    }
+    return null;
+   }
+   
     public int addTaskList(int ProjectId, String Title, String Description, int CreatedBy  ){
         TaskList tl = new TaskList( ProjectId,  Title, Description, CreatedBy, getNextTaskListid() );
-        System.out.println ("New ListaDeTarefa ID: " + tl.getTaskListId());
+        //System.out.println ("New ListaDeTarefa ID: " + tl.getTaskListId());
         ListaDeTarefas.add(tl);
         return tl.getTaskListId();
     }

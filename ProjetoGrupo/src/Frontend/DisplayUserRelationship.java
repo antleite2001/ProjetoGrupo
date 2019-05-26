@@ -8,41 +8,49 @@ package Frontend;
 import Backend.Project;
 import Backend.Sistema;
 import Backend.Task;
+import Backend.TaskList;
 import Backend.UserProjectsAssociation;
 import java.util.ArrayList;
+import javax.swing.JTable;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
- 
 public class DisplayUserRelationship extends javax.swing.JDialog {
 
     Sistema s;
     DefaultTableModel modelProjectsOwnedByUser, modelUserIsAssociatedToProjects, modelTasksAssignedToUser;
+
     public DisplayUserRelationship(java.awt.Frame parent, boolean modal, Sistema s) {
         super(parent, modal);
         initComponents();
         this.s = s;
-        this.setTitle("Mostrar Relacionamentos - " + s.getCurrentUser().getUserName() + " ("+ s.getCurrentUser().getEmail()+")");
-        
+        this.setTitle("Mostrar Relacionamentos - " + s.getCurrentUser().getUserName() + " (" + s.getCurrentUser().getEmail() + ")");
+        panelProjectsOwnedByUser.setBorder(javax.swing.BorderFactory.createTitledBorder(s.getCurrentUser().getUserName() + " é Proprietário dos Projetos"));
+
+        panelTasksAssignedTo.setBorder(javax.swing.BorderFactory.createTitledBorder("Tarefas Atribuídas a " + s.getCurrentUser().getUserName()));
+
+        panelUserIsAssociatedToProjects.setBorder(javax.swing.BorderFactory.createTitledBorder(s.getCurrentUser().getUserName() + " está Associado aos Projetos"));
+
         //set jtable selection to single row------------------------------------------------------------
         tableProjectsOwnedByUser.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        
+
         //prevent editing of jtable cells
         tableProjectsOwnedByUser.setDefaultEditor(Object.class, null);
-        
+
         //create modelProjectsOwnedByUser to handle columns and rows
-        modelProjectsOwnedByUser = new DefaultTableModel();        
+        modelProjectsOwnedByUser = new DefaultTableModel();
         modelProjectsOwnedByUser.addColumn("Id do Projeto");
         modelProjectsOwnedByUser.addColumn("Título do Projeto");
         modelProjectsOwnedByUser.addColumn("Descrição do Projeto");
         tableProjectsOwnedByUser.setModel(modelProjectsOwnedByUser);
-        
-         
+
         ArrayList<Project> ProjectsByOwner = new ArrayList<>();
-        
+
         //Select projects owned by current user (owner of projects)
         //Only owners can create Task Lista and Tasks. See Specification
         ProjectsByOwner = s.getRepositoryProjects().getProjectsByOwner(s.getCurrentUser().getUserId());
-        
+
         //Add rows to table with projects info
         for (Project p : ProjectsByOwner) {
             modelProjectsOwnedByUser.addRow(new Object[]{
@@ -52,28 +60,26 @@ public class DisplayUserRelationship extends javax.swing.JDialog {
             });
 
         }
-        
-        
+
         //set jtable selection to single row------------------------------------------------------------
         tableUserIsAssociatedToProjects.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        
+
         //prevent editing of jtable cells
         tableUserIsAssociatedToProjects.setDefaultEditor(Object.class, null);
-        
+
         //create modelProjectsOwnedByUser to handle columns and rows
-        modelUserIsAssociatedToProjects = new DefaultTableModel();        
+        modelUserIsAssociatedToProjects = new DefaultTableModel();
         modelUserIsAssociatedToProjects.addColumn("Id do Projeto");
         modelUserIsAssociatedToProjects.addColumn("Título do Projeto");
         modelUserIsAssociatedToProjects.addColumn("Descrição do Projeto");
         tableUserIsAssociatedToProjects.setModel(modelUserIsAssociatedToProjects);
-        
-         
+
         ArrayList<UserProjectsAssociation> ProjectsAssociatedToUser = new ArrayList<>();
-        
+
         //Select projects owned by current user (owner of projects)
         //Only owners can create Task Lista and Tasks. See Specification
         ProjectsAssociatedToUser = s.getRepositoryUserProjectsAssociation().getUserProjectsAssociation(s.getCurrentUser().getUserId());
-        
+
         //Add rows to table with projects info
         for (UserProjectsAssociation p : ProjectsAssociatedToUser) {
             Project project = s.getRepositoryProjects().getProjectsById(p.getProjectId());
@@ -84,65 +90,117 @@ public class DisplayUserRelationship extends javax.swing.JDialog {
             });
 
         }
-        
-        
+
         //set jtable selection to single row------------------------------------------------------------
         tableTasksAssignedTo.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        
+        //Auto resize all columns
+        tableTasksAssignedTo.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+
         //prevent editing of jtable cells
         tableTasksAssignedTo.setDefaultEditor(Object.class, null);
-        
+
         //create modelProjectsOwnedByUser to handle columns and rows
-        modelTasksAssignedToUser = new DefaultTableModel();        
-        modelTasksAssignedToUser.addColumn("Id da Tarefa");
-        modelTasksAssignedToUser.addColumn("Título da Tarefa");
-        modelTasksAssignedToUser.addColumn("Descrição da Tarefa");
-        modelTasksAssignedToUser.addColumn("Prioridade");
-        modelTasksAssignedToUser.addColumn("Status");
-        modelTasksAssignedToUser.addColumn("Criada Por");
-        modelTasksAssignedToUser.addColumn("Data de Início");
-        modelTasksAssignedToUser.addColumn("Data de Fim");
+        modelTasksAssignedToUser = new DefaultTableModel();
+        modelTasksAssignedToUser.addColumn("Id da Tarefa");//0
+        modelTasksAssignedToUser.addColumn("Título da Tarefa");//1
+        modelTasksAssignedToUser.addColumn("Descrição da Tarefa");//2
+        modelTasksAssignedToUser.addColumn("Prioridade");//3
+        modelTasksAssignedToUser.addColumn("Status");//4
+        modelTasksAssignedToUser.addColumn("Criada Por");//5
+        modelTasksAssignedToUser.addColumn("Data de Início");//6
+        modelTasksAssignedToUser.addColumn("Data de Fim");//7
+        modelTasksAssignedToUser.addColumn("Id Lista de Tarefas");//8
         tableTasksAssignedTo.setModel(modelTasksAssignedToUser);
-        
-         
+
         ArrayList<Task> taskAssignedToUser = new ArrayList<>();
-        
+
         //Select projects owned by current user (owner of projects)
         //Only owners can create Task Lista and Tasks. See Specification
         taskAssignedToUser = s.getRepositoryTasks().getTasksAssignedToUser(s.getCurrentUser().getUserId());
-        
+
         //Add rows to table with projects info
         for (Task t : taskAssignedToUser) {
-            //Project project = s.getRepositoryProjects().getProjectsById(p.getProjectId());
-            modelTasksAssignedToUser.addRow(new Object[]{
-                t.getTaskId(), 
-                t.getTitle(),
-                t.getDescription(),
-                t.getTaskPriority(),
-                t.getTaskStatus(),
-                t.getCreatedBy(),
-                t.getStartDate(),
-                t.getEndDate()
-            });
+            //
+            TaskList tl = s.getRepositoryTaskLists().getTaskListByTaskId(t.getTaskListId());
+            
+
+            if (t.getEndDate() == null) {
+                modelTasksAssignedToUser.addRow(new Object[]{
+                    t.getTaskId(),
+                    t.getTitle(),
+                    t.getDescription(),
+                    t.getTaskPriority(),
+                    t.getTaskStatus(),
+                    t.getCreatedBy(),
+                    Validacoes.FormatDate(t.getStartDate()),
+                    "",
+                    tl.getTaskListId()
+
+                });
+            } else {
+                modelTasksAssignedToUser.addRow(new Object[]{
+                    t.getTaskId(),
+                    t.getTitle(),
+                    t.getDescription(),
+                    t.getTaskPriority(),
+                    t.getTaskStatus(),
+                    t.getCreatedBy(),
+                    Validacoes.FormatDate(t.getStartDate()),
+                    Validacoes.FormatDate(t.getEndDate()),
+                    tl.getTaskListId()
+                });
+
+            }
 
         }
         
-        
-        
+        //Events
+        tableTasksAssignedTo.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent event) {
+                SelectProject();
+                 
+            }
+        });
+
+
     }
 
      
+    void SelectProject()
+    {
+        int TaskListId = (int)tableTasksAssignedTo.getValueAt(tableTasksAssignedTo.getSelectedRow() ,8);
+        int SelectedProjectId=0;
+        for(TaskList tl: s.getRepositoryTaskLists().getListaDeTarefas())
+        {
+            if(tl.getProjectId()==TaskListId)
+            {
+                SelectedProjectId = tl.getProjectId();
+                break;
+            }
+        }
+        
+        Project project = s.getRepositoryProjects().getProjectsById(SelectedProjectId);
+            //Find Project associated to TaskList
+
+            for (int i = 0; i < tableUserIsAssociatedToProjects.getRowCount(); i++) {
+                if ((int) tableUserIsAssociatedToProjects.getValueAt(i, 0) == project.getProjectId()) {
+                    tableUserIsAssociatedToProjects.setRowSelectionInterval(i, i);
+                    break;
+                }
+            }
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel2 = new javax.swing.JPanel();
+        panelProjectsOwnedByUser = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableProjectsOwnedByUser = new javax.swing.JTable();
-        jPanel3 = new javax.swing.JPanel();
+        panelUserIsAssociatedToProjects = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tableUserIsAssociatedToProjects = new javax.swing.JTable();
-        jPanel6 = new javax.swing.JPanel();
+        panelTasksAssignedTo = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
         tableTasksAssignedTo = new javax.swing.JTable();
         btnStatistics = new javax.swing.JButton();
@@ -151,68 +209,68 @@ public class DisplayUserRelationship extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Mostrar relacionamentos");
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("É Proprietário dos Projetos"));
+        panelProjectsOwnedByUser.setBorder(javax.swing.BorderFactory.createTitledBorder("É Proprietário dos Projetos"));
 
         tableProjectsOwnedByUser.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         tableProjectsOwnedByUser.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(tableProjectsOwnedByUser);
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        javax.swing.GroupLayout panelProjectsOwnedByUserLayout = new javax.swing.GroupLayout(panelProjectsOwnedByUser);
+        panelProjectsOwnedByUser.setLayout(panelProjectsOwnedByUserLayout);
+        panelProjectsOwnedByUserLayout.setHorizontalGroup(
+            panelProjectsOwnedByUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelProjectsOwnedByUserLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1000, Short.MAX_VALUE)
                 .addContainerGap())
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        panelProjectsOwnedByUserLayout.setVerticalGroup(
+            panelProjectsOwnedByUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelProjectsOwnedByUserLayout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Está Associado aos Projetos"));
+        panelUserIsAssociatedToProjects.setBorder(javax.swing.BorderFactory.createTitledBorder("Está Associado aos Projetos"));
 
         tableUserIsAssociatedToProjects.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         tableUserIsAssociatedToProjects.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane2.setViewportView(tableUserIsAssociatedToProjects);
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        javax.swing.GroupLayout panelUserIsAssociatedToProjectsLayout = new javax.swing.GroupLayout(panelUserIsAssociatedToProjects);
+        panelUserIsAssociatedToProjects.setLayout(panelUserIsAssociatedToProjectsLayout);
+        panelUserIsAssociatedToProjectsLayout.setHorizontalGroup(
+            panelUserIsAssociatedToProjectsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelUserIsAssociatedToProjectsLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1000, Short.MAX_VALUE)
                 .addContainerGap())
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        panelUserIsAssociatedToProjectsLayout.setVerticalGroup(
+            panelUserIsAssociatedToProjectsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelUserIsAssociatedToProjectsLayout.createSequentialGroup()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder("Tem as Tarefas Atribuídas"));
+        panelTasksAssignedTo.setBorder(javax.swing.BorderFactory.createTitledBorder("Tem as Tarefas Atribuídas"));
 
         tableTasksAssignedTo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         tableTasksAssignedTo.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane5.setViewportView(tableTasksAssignedTo);
 
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
+        javax.swing.GroupLayout panelTasksAssignedToLayout = new javax.swing.GroupLayout(panelTasksAssignedTo);
+        panelTasksAssignedTo.setLayout(panelTasksAssignedToLayout);
+        panelTasksAssignedToLayout.setHorizontalGroup(
+            panelTasksAssignedToLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelTasksAssignedToLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 1000, Short.MAX_VALUE)
+                .addComponent(jScrollPane5)
                 .addContainerGap())
         );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
+        panelTasksAssignedToLayout.setVerticalGroup(
+            panelTasksAssignedToLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelTasksAssignedToLayout.createSequentialGroup()
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -238,27 +296,27 @@ public class DisplayUserRelationship extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(128, 128, 128)
                         .addComponent(btnStatistics)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnStatistics1)))
+                        .addComponent(btnStatistics1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(panelProjectsOwnedByUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(panelUserIsAssociatedToProjects, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(panelTasksAssignedTo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(228, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(panelProjectsOwnedByUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(panelUserIsAssociatedToProjects, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(panelTasksAssignedTo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnStatistics, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -271,18 +329,17 @@ public class DisplayUserRelationship extends javax.swing.JDialog {
 
     private void btnStatistics1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStatistics1ActionPerformed
         //tasks
-        for(Task t :s.getRepositoryTasks().getTarefa())
-        {
-            System.out.println(
-                    t.getTaskId()+ "  "+
-                t.getTitle()+ "  "+
-                t.getDescription()+"  "+
-                t.getTaskPriority()+"  "+
-                t.getTaskStatus()+"  "+
-                t.getCreatedBy()+"  "+
-                t.getStartDate()+"  "+
-                t.getEndDate());
-        }
+//        for (Task t : s.getRepositoryTasks().getTasks()) {
+//            System.out.println(
+//                    t.getTaskId() + "  "
+//                    + t.getTitle() + "  "
+//                    + t.getDescription() + "  "
+//                    + t.getTaskPriority() + "  "
+//                    + t.getTaskStatus() + "  "
+//                    + t.getCreatedBy() + "  "
+//                    + t.getStartDate() + "  "
+//                    + t.getEndDate());
+//        }
     }//GEN-LAST:event_btnStatistics1ActionPerformed
 
     private void btnStatisticsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStatisticsActionPerformed
@@ -332,24 +389,16 @@ public class DisplayUserRelationship extends javax.swing.JDialog {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCreateTaskList;
-    private javax.swing.JButton btnCreateTaskList1;
     private javax.swing.JButton btnStatistics;
     private javax.swing.JButton btnStatistics1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JPanel panelProjectsOwnedByUser;
+    private javax.swing.JPanel panelTasksAssignedTo;
+    private javax.swing.JPanel panelUserIsAssociatedToProjects;
     private javax.swing.JTable tableProjectsOwnedByUser;
-    private javax.swing.JTable tableProjectsOwnedByUser1;
     private javax.swing.JTable tableTasksAssignedTo;
     private javax.swing.JTable tableUserIsAssociatedToProjects;
-    private javax.swing.JTable tableUserIsAssociatedToProjects1;
     // End of variables declaration//GEN-END:variables
 }

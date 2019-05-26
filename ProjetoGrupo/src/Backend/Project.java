@@ -25,7 +25,7 @@ public class Project
      
        this.enumprojeto = ProjectStatus.NOTSTARTED;
        this.ProjetoID = projetoID;
-       System.out.println("Project StartDate " + this.StartDate + "  EndDate " +dataFim);
+       //System.out.println("Project StartDate " + this.StartDate + "  EndDate " +dataFim);
     }
 
     public int getProjectId() {

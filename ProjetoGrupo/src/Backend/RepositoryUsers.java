@@ -31,7 +31,7 @@ public class RepositoryUsers {
     //adicionar utilizador caso este ainda nao exista na lista de utilizadores
     public int addUser(String nome, String email, String password) {
         User u = new User(nome, email, password, getNextuserid());
-        System.out.println("New User : " + u.getUserName() + "  " + u.getEmail() + "  " + u.getUserId());
+        //System.out.println("New User : " + u.getUserName() + "  " + u.getEmail() + "  " + u.getUserId());
         Users.add(u);
         return u.getUserId();
     }
@@ -40,7 +40,7 @@ public class RepositoryUsers {
         for (User u : Users) {
             if (u.getUserId() == userId) {
                 u.setUserName(newName);
-                System.out.println("New User Name: " + u.getUserName() + "  " + u.getEmail() + "  " + u.getUserId());
+                //System.out.println("New User Name: " + u.getUserName() + "  " + u.getEmail() + "  " + u.getUserId());
                 return;
             }
         }
@@ -50,7 +50,7 @@ public class RepositoryUsers {
         for (User u : Users) {
             if (u.getUserId() == userId) {
                 u.setUserPassword(newPassword);
-                System.out.println("New User Password: " + u.getUserName() + "  " + u.getEmail() + "  " + u.getUserPassword() + " " + u.getUserId());
+                //System.out.println("New User Password: " + u.getUserName() + "  " + u.getEmail() + "  " + u.getUserPassword() + " " + u.getUserId());
                 return;
             }
         }
@@ -59,7 +59,7 @@ public class RepositoryUsers {
         for (User u : Users) {
             if (u.getUserId() == userId) {
                 u.setUserEmail(newEmail);
-                System.out.println("New User Email: " + u.getUserName() + "  " + u.getEmail() + "  " + u.getUserId());
+                //System.out.println("New User Email: " + u.getUserName() + "  " + u.getEmail() + "  " + u.getUserId());
                 return;
             }
         }

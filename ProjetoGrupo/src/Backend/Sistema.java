@@ -35,34 +35,40 @@ public class Sistema {
         int p6 = 1;
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy");
         try {
-            p1 = repositoryProjects.addProject(userid1, "P1 jose alvaro", "P1", 
+            p1 = repositoryProjects.addProject(userid1, "P1 jose alvaro", "P1",
                     formatter.parse("22-May-2019"),
                     formatter.parse("23-May-2019"), RepositoryUserProjectsAssociation);
-            p2 = repositoryProjects.addProject(userid1, "P2 jose alvaro", "P2", 
+            p2 = repositoryProjects.addProject(userid1, "P2 jose alvaro", "P2",
                     formatter.parse("24-May-2019"), formatter.parse("25-May-2019"),
                     RepositoryUserProjectsAssociation);
-            p3 = repositoryProjects.addProject(userid1, "P3 jose alvaro", "P3", 
+            p3 = repositoryProjects.addProject(userid1, "P3 jose alvaro", "P3",
                     formatter.parse("26-May-2019"), formatter.parse("27-May-2019"),
                     RepositoryUserProjectsAssociation);
 
-            p4 = repositoryProjects.addProject(userid2, "P1 antonio leite", "P1", 
+            p4 = repositoryProjects.addProject(userid2, "P1 antonio leite", "P1",
                     formatter.parse("22-May-2019"), formatter.parse("22-May-2019"),
                     RepositoryUserProjectsAssociation);
-            p5 = repositoryProjects.addProject(userid2, "P2 antonio leite", "P2", 
+            p5 = repositoryProjects.addProject(userid2, "P2 antonio leite", "P2",
                     formatter.parse("22-May-2019"), formatter.parse("22-May-2019"),
                     RepositoryUserProjectsAssociation);
-            p6 = repositoryProjects.addProject(userid2, "P3 antonio leite", "P3", 
+            p6 = repositoryProjects.addProject(userid2, "P3 antonio leite", "P3",
                     formatter.parse("22-May-2019"), formatter.parse("22-May-2019"),
                     RepositoryUserProjectsAssociation);
 
         } catch (ParseException e) {
             e.printStackTrace();
-            System.out.println("SISTEMA-ERROR:" + e.getMessage());
+            //System.out.println("SISTEMA-ERROR:" + e.getMessage());
         }
 
+        //Associations Users Project
+        RepositoryUserProjectsAssociation.addUserProjectsAssociation(userid2, p1, userid1);
+        //RepositoryUserProjectsAssociation.addUserProjectsAssociation(userid3, p2, userid1);
+        //RepositoryUserProjectsAssociation.addUserProjectsAssociation(userid2, p3, userid1);
+        
         //task List repository
         //ProjectId, String Title, String Description, int CreatedBy
-       int taskList1= repositoryTaskLists.addTaskList(p1, "TL1", "TaskDesc1", userid1);
+        int taskList1
+                = repositoryTaskLists.addTaskList(p1, "TL1", "TaskDesc1", userid1);
         repositoryTaskLists.addTaskList(p1, "TL2", "TaskDesc2", userid1);
 
         repositoryTaskLists.addTaskList(p2, "TL3", "TaskDesc3", userid1);
@@ -72,13 +78,20 @@ public class Sistema {
         repositoryTaskLists.addTaskList(p1, "TL6", "TaskDesc6", userid1);
         repositoryTaskLists.addTaskList(p1, "TL7", "TaskDesc7", userid1);
         repositoryTaskLists.addTaskList(p1, "TL8", "TaskDesc8", userid1);
+
+        //Tasks CreatedBy,   Title,   Description,   priority, Status, 
+        //  DataDeInicio,   TaskListId,   assignedTo
+        repositoryTasks.addTask(userid1, "Task1", "Task1 description", TaskPriority.LOW, TaskStatus.NOTSTARTED, new Date(System.currentTimeMillis()), taskList1, userid1);
+        repositoryTasks.addTask(userid1, "Task2", "Task3 description", TaskPriority.MEDIUM, TaskStatus.INPROGRESS, new Date(System.currentTimeMillis()), taskList1, userid1);
+        repositoryTasks.addTask(userid1, "Task3", "Task3 description", TaskPriority.HIGH, TaskStatus.FINISHED, new Date(System.currentTimeMillis()), taskList1, userid1);
+        repositoryTasks.addTask(userid1, "Task4", "Task4 description", 
+                TaskPriority.HIGH, 
+                TaskStatus.FINISHED, 
+                new Date(System.currentTimeMillis()), 
+                taskList1, 
+                userid2);
+
         
-        //Tasks
-        repositoryTasks.addTask(userid1, "Task1", "Task1 description", TaskPriority.LOW, TaskStatus.FINISHED, new Date(System.currentTimeMillis()),taskList1); 
-        ////UserId, ProjectId, ProjectOwner
-        //RepositoryUserProjectsAssociation.addUserProjectsAssociation(userid2, p1, userid1);
-        //RepositoryUserProjectsAssociation.addUserProjectsAssociation(userid3, p2, userid1);
-        //RepositoryUserProjectsAssociation.addUserProjectsAssociation(userid2, p3, userid1);
     }
 
     public RepositoryTasks getRepositoryTasks() {

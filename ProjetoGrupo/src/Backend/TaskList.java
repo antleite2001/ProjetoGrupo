@@ -47,6 +47,16 @@ public class TaskList{
         return createdBy;
     }
 
+    public void setTitle(String Title) {
+        this.Title = Title;
+    }
+
+    public void setDescription(String Description) {
+        this.Description = Description;
+    }
+    
+    
+
      
    
     
