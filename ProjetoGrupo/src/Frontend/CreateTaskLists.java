@@ -183,7 +183,7 @@ public class CreateTaskLists extends javax.swing.JDialog {
                 btnCancelActionPerformed(evt);
             }
         });
-        getContentPane().add(btnCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 630, 200, 46));
+        getContentPane().add(btnCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 650, 200, 46));
 
         btnCreateTaskList.setBackground(new java.awt.Color(51, 110, 123));
         btnCreateTaskList.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
@@ -195,7 +195,7 @@ public class CreateTaskLists extends javax.swing.JDialog {
                 btnCreateTaskListActionPerformed(evt);
             }
         });
-        getContentPane().add(btnCreateTaskList, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 670, 200, 46));
+        getContentPane().add(btnCreateTaskList, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 650, 200, 46));
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Associar a projeto", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Calibri", 0, 18))); // NOI18N
 
@@ -203,6 +203,8 @@ public class CreateTaskLists extends javax.swing.JDialog {
         tableProjects.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(tableProjects);
 
+        lbltableProjectWarning.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
+        lbltableProjectWarning.setForeground(new java.awt.Color(255, 0, 0));
         lbltableProjectWarning.setText("lbltableProjectWarning");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);

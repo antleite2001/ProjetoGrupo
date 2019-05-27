@@ -73,21 +73,19 @@ public class Sistema {
         RepositoryUserProjectsAssociation.addUserProjectsAssociation(PedroSilva, p1JoseAlvaro, JoseAlvaro);
         RepositoryUserProjectsAssociation.addUserProjectsAssociation(PedroSilva, p3JoseAlvaro, JoseAlvaro);
         
-        /*
+        
         //task List repository
         //ProjectId, String Title, String Description, int CreatedBy
-        int taskList1
-                = repositoryTaskLists.addTaskList(p1, "TL1", "TaskDesc1", userid1);
-        repositoryTaskLists.addTaskList(p1, "TL2", "TaskDesc2", userid1);
+        repositoryTaskLists.addTaskList(p1JoseAlvaro, "TL1", "TaskDesc1", JoseAlvaro);
+        repositoryTaskLists.addTaskList(p2ManuelSilva, "TL2", "TaskDesc2", ManuelSilva);
+        repositoryTaskLists.addTaskList(p1JoseAlvaro, "TL3", "TaskDesc3", JoseAlvaro);
+        
+        
+        repositoryTaskLists.addTaskList(p2ManuelSilva, "TL4", "TaskDesc4", ManuelSilva);
+        repositoryTaskLists.addTaskList(p3JoseAlvaro, "TL5", "TaskDesc5", JoseAlvaro);
 
-        repositoryTaskLists.addTaskList(p2, "TL3", "TaskDesc3", userid1);
-        repositoryTaskLists.addTaskList(p3, "TL4", "TaskDesc4", userid1);
-        repositoryTaskLists.addTaskList(p2, "TL5", "TaskDesc5", userid1);
-
-        repositoryTaskLists.addTaskList(p1, "TL6", "TaskDesc6", userid1);
-        repositoryTaskLists.addTaskList(p1, "TL7", "TaskDesc7", userid1);
-        repositoryTaskLists.addTaskList(p1, "TL8", "TaskDesc8", userid1);
-
+        
+/*
         //Tasks CreatedBy,   Title,   Description,   priority, Status, 
         //  DataDeInicio,   TaskListId,   assignedTo
         repositoryTasks.addTask(userid1, "Task1", "Task1 description", TaskPriority.LOW, TaskStatus.NOTSTARTED, new Date(System.currentTimeMillis()), taskList1, userid1);

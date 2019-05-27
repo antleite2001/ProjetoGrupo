@@ -262,7 +262,7 @@ public class ChangeTask extends javax.swing.JDialog {
             lblStartDateWarning.setText("Data de início da tarefa deve ser igual ou superior à data atual");
             b = false;
         } else {
-            lblStartDateWarning.setText(" ");
+            lblStartDateWarning.setText("");
         }
 
         

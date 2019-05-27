@@ -174,7 +174,7 @@ public class CreateProject extends javax.swing.JDialog {
         });
         getContentPane().add(btnCreateProject, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 530, 200, 46));
 
-        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Descrição"));
+        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Descrição", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Calibri", 0, 18))); // NOI18N
         jPanel5.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
 
         lblDescriptionWarning.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
@@ -208,7 +208,7 @@ public class CreateProject extends javax.swing.JDialog {
 
         getContentPane().add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 620, 110));
 
-        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Título"));
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Título", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Calibri", 0, 18))); // NOI18N
         jPanel4.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
 
         txtProjectTitle.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
@@ -236,12 +236,12 @@ public class CreateProject extends javax.swing.JDialog {
                 .addComponent(txtProjectTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblTitleWarning, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, 110));
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Data de Início"));
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Data de Início", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Calibri", 0, 18))); // NOI18N
         jPanel3.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
 
         calStartDate.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
@@ -270,12 +270,12 @@ public class CreateProject extends javax.swing.JDialog {
                 .addComponent(calStartDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblStartDateWarning, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, 620, 110));
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Data de Fim"));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Data de Fim", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Calibri", 0, 18))); // NOI18N
         jPanel2.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
 
         calEndDate.setPreferredSize(new java.awt.Dimension(200, 22));

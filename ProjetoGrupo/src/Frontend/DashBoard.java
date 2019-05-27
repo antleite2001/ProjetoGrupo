@@ -178,6 +178,11 @@ public class DashBoard extends javax.swing.JDialog {
         jMenu4.add(menuCreateTaskList);
 
         menuDisplayTaskList.setText("Mostrar Lista de Tarefas");
+        menuDisplayTaskList.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuDisplayTaskListActionPerformed(evt);
+            }
+        });
         jMenu4.add(menuDisplayTaskList);
 
         menuEditTaskList.setText("Editar Lista de Tarefas");
@@ -319,6 +324,12 @@ public class DashBoard extends javax.swing.JDialog {
         changeTaskList.setLocationRelativeTo(null);
         changeTaskList.setVisible(true);
     }//GEN-LAST:event_menuEditTaskListActionPerformed
+
+    private void menuDisplayTaskListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuDisplayTaskListActionPerformed
+        DisplayTaskList displaytasklist = new DisplayTaskList(null, true, s);
+        displaytasklist.setLocationRelativeTo(null);
+        displaytasklist.setVisible(true);
+    }//GEN-LAST:event_menuDisplayTaskListActionPerformed
 
     /**
      * @param args the command line arguments

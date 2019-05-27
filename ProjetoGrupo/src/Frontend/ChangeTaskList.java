@@ -21,7 +21,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class ChangeTaskList extends javax.swing.JDialog {
     Sistema s;
- DefaultTableModel modelTaskList;
+    DefaultTableModel modelTaskList;
     /**
      * Creates new form ChangeTaskList
      */
@@ -160,6 +160,9 @@ void SelectTaskList (){
             }
         });
 
+        btnExit.setBackground(new java.awt.Color(51, 110, 123));
+        btnExit.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        btnExit.setForeground(new java.awt.Color(255, 255, 255));
         btnExit.setText("Cancelar");
         btnExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -167,6 +170,9 @@ void SelectTaskList (){
             }
         });
 
+        btnUpdate.setBackground(new java.awt.Color(51, 110, 123));
+        btnUpdate.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        btnUpdate.setForeground(new java.awt.Color(255, 255, 255));
         btnUpdate.setText("Guardar");
         btnUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -184,7 +190,7 @@ void SelectTaskList (){
                     .addComponent(tbTitle)
                     .addComponent(tbDescription)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 443, Short.MAX_VALUE)
+                        .addGap(0, 401, Short.MAX_VALUE)
                         .addComponent(btnExit)
                         .addGap(34, 34, 34)
                         .addComponent(btnUpdate)))
@@ -198,7 +204,7 @@ void SelectTaskList (){
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(250, Short.MAX_VALUE)
+                .addContainerGap(240, Short.MAX_VALUE)
                 .addComponent(tbTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(38, 38, 38)
                 .addComponent(tbDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
