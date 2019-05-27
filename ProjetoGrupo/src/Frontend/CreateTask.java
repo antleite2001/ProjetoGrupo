@@ -91,7 +91,7 @@ public class CreateTask extends javax.swing.JDialog {
             
             //System.out.println("TaskList Created by " + tl.getCreatedBy());
             //get only the users related to current project owner
-            if (tl.getCreatedBy() == s.getCurrentUser().getUserId()) {
+            if (tl.getOwnerId() == s.getCurrentUser().getUserId()) {
                 //get tasklist data
                 //User u2 = s.getUsersRepository().getUserById(u.getUserId());
                 //if (!u1.contains(u2)) {

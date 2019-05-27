@@ -7,15 +7,19 @@ package Frontend;
 
 import Backend.Project;
 import Backend.Sistema;
+import Backend.User;
+import Backend.UserProjectsAssociation;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 public class DisplayProjects extends javax.swing.JDialog {
 
     Sistema s;
-    DefaultTableModel modelProjects;
+    DefaultTableModel modelProjects, modelUsers;
 
     /**
      * Creates new form ViewProjects
@@ -24,7 +28,14 @@ public class DisplayProjects extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.s = s;
-        this.setTitle("Visualizar Projetos - " + s.getCurrentUser().getUserName() + " (" + s.getCurrentUser().getEmail() + ")");
+        Validacoes.SetDialogProperties(this, s, 900, 800, "Visualizar Projetos");
+        panelProjects.setBorder(javax.swing.BorderFactory.createTitledBorder(null, 
+                "Projetos Pertencentes a "+s.getCurrentUser().getUserName(), 
+                javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, 
+                javax.swing.border.TitledBorder.DEFAULT_POSITION, 
+                new java.awt.Font("Calibri", 0, 18))); 
+
+         
         //set jtable selection to multiple row selection
         tableProjects.setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 
@@ -33,6 +44,7 @@ public class DisplayProjects extends javax.swing.JDialog {
 
         //create model to handle columns and rows
         modelProjects = new DefaultTableModel();
+        modelProjects.addColumn("Id do Projeto");
         modelProjects.addColumn("Título do Projeto");
         modelProjects.addColumn("Descrição do Projeto");
         modelProjects.addColumn("Data De Início");
@@ -40,7 +52,7 @@ public class DisplayProjects extends javax.swing.JDialog {
 
         tableProjects.setModel(modelProjects);
 
-        
+        //Fill Table Projects
         ArrayList<Project> ProjectsByOwner = new ArrayList<>();
         //Select projects owned by current user (owner of projects)
         ProjectsByOwner = s.getRepositoryProjects().getProjectsByOwner(s.getCurrentUser().getUserId());
@@ -48,12 +60,46 @@ public class DisplayProjects extends javax.swing.JDialog {
         //Add rows to table with projects info
         for (Project p : ProjectsByOwner) {
             modelProjects.addRow(new Object[]{
+                p.getProjectId(),
                 p.getProjectTitle(),
                 p.getProjectDescription(),
                 Validacoes.FormatDate(p.getStartDate()),
                 Validacoes.FormatDate(p.getEndDate())
             });
         }
+        //Users table-----------------------------------------------------------
+        tableUsers.setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+
+        //prevent editing of jtable cells
+        tableUsers.setDefaultEditor(Object.class, null);
+
+        //create model to handle columns and rows
+        modelUsers = new DefaultTableModel();
+        modelUsers.addColumn("Id do Utilizador");
+        modelUsers.addColumn("Nome do Utilizador");
+        modelUsers.addColumn("Email do Utilizador");
+
+        //relate model to table
+        tableUsers.setModel(modelUsers);
+
+ 
+        //Events
+        //jtable project selection change event
+        tableProjects.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent event) {
+                modelUsers.setRowCount(0); //Clear users table
+                int projectid = (int) tableProjects.getValueAt(tableProjects.getSelectedRow(), 0);
+                //get users from association 
+                for (UserProjectsAssociation u : s.getRepositoryUserProjectsAssociation().getUserProjectsAssociations()) {
+                    if (projectid == u.getProjectId()) {
+                        User u2 = s.getUsersRepository().getUserById(u.getUserId());
+                        modelUsers.addRow(new Object[]{u2.getUserId(), u2.getUserName(), u2.getEmail()});
+
+                    }
+                }
+            }
+        });
     }
 
     /**
@@ -65,41 +111,71 @@ public class DisplayProjects extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel2 = new javax.swing.JPanel();
+        panelProjects = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableProjects = new javax.swing.JTable();
         btnCancel = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tableUsers = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Projetos Pertencentes ao Utilizador Atual"));
+        panelProjects.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Projetos Pertencentes a", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Calibri", 0, 18))); // NOI18N
 
         tableProjects.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         tableProjects.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(tableProjects);
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        javax.swing.GroupLayout panelProjectsLayout = new javax.swing.GroupLayout(panelProjects);
+        panelProjects.setLayout(panelProjectsLayout);
+        panelProjectsLayout.setHorizontalGroup(
+            panelProjectsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelProjectsLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 864, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 849, Short.MAX_VALUE)
                 .addContainerGap())
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
+        panelProjectsLayout.setVerticalGroup(
+            panelProjectsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelProjectsLayout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        btnCancel.setText("Cancelar");
+        btnCancel.setBackground(new java.awt.Color(51, 110, 123));
+        btnCancel.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        btnCancel.setForeground(new java.awt.Color(255, 255, 255));
+        btnCancel.setText("Sair");
+        btnCancel.setBorder(null);
         btnCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelActionPerformed(evt);
             }
         });
+
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Utilizadores Associados ao Projeto Selecionado", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Calibri", 0, 18))); // NOI18N
+        jPanel3.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+
+        tableUsers.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        tableUsers.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane2.setViewportView(tableUsers);
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2)
+                .addContainerGap())
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -110,18 +186,21 @@ public class DisplayProjects extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnCancel))
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(50, 50, 50))
+                        .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panelProjects, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnCancel)
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addComponent(panelProjects, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         pack();
@@ -175,8 +254,11 @@ public class DisplayProjects extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
-    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JPanel panelProjects;
     private javax.swing.JTable tableProjects;
+    private javax.swing.JTable tableUsers;
     // End of variables declaration//GEN-END:variables
 }

@@ -173,23 +173,31 @@ public class CreateTaskLists extends javax.swing.JDialog {
         setTitle("Criar lista de tarefas");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnCancel.setText("Cancelar");
+        btnCancel.setBackground(new java.awt.Color(51, 110, 123));
+        btnCancel.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        btnCancel.setForeground(new java.awt.Color(255, 255, 255));
+        btnCancel.setText("Sair");
+        btnCancel.setBorder(null);
         btnCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelActionPerformed(evt);
             }
         });
-        getContentPane().add(btnCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 623, -1, -1));
+        getContentPane().add(btnCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 630, 200, 46));
 
+        btnCreateTaskList.setBackground(new java.awt.Color(51, 110, 123));
+        btnCreateTaskList.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        btnCreateTaskList.setForeground(new java.awt.Color(255, 255, 255));
         btnCreateTaskList.setText("Criar lista de tarefas");
+        btnCreateTaskList.setBorder(null);
         btnCreateTaskList.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCreateTaskListActionPerformed(evt);
             }
         });
-        getContentPane().add(btnCreateTaskList, new org.netbeans.lib.awtextra.AbsoluteConstraints(105, 623, -1, -1));
+        getContentPane().add(btnCreateTaskList, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 670, 200, 46));
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Associar a projeto"));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Associar a projeto", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Calibri", 0, 18))); // NOI18N
 
         tableProjects.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         tableProjects.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -204,27 +212,31 @@ public class CreateTaskLists extends javax.swing.JDialog {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1000, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(lbltableProjectWarning, javax.swing.GroupLayout.PREFERRED_SIZE, 712, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 288, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lbltableProjectWarning, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 242, -1, -1));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, -1, -1));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Título da Lista de Tarefas"));
 
+        tbTaskListTitle.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        tbTaskListTitle.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
         tbTaskListTitle.setPreferredSize(new java.awt.Dimension(30, 20));
 
+        lblTitleWarning.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
+        lblTitleWarning.setForeground(new java.awt.Color(255, 0, 0));
         lblTitleWarning.setText("lblTitleWarning");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -235,7 +247,7 @@ public class CreateTaskLists extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(tbTaskListTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblTitleWarning, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1000, Short.MAX_VALUE))
+                    .addComponent(lblTitleWarning, javax.swing.GroupLayout.DEFAULT_SIZE, 588, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -247,10 +259,15 @@ public class CreateTaskLists extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 1032, -1));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 620, 110));
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Descrição da Lista de Tarefas"));
 
+        tbTaskListDescription.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        tbTaskListDescription.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+
+        lblDescriptionWarning.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
+        lblDescriptionWarning.setForeground(new java.awt.Color(255, 0, 0));
         lblDescriptionWarning.setText("lblDescriptionWarning");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -261,7 +278,7 @@ public class CreateTaskLists extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(tbTaskListDescription)
-                    .addComponent(lblDescriptionWarning, javax.swing.GroupLayout.DEFAULT_SIZE, 1000, Short.MAX_VALUE))
+                    .addComponent(lblDescriptionWarning, javax.swing.GroupLayout.DEFAULT_SIZE, 588, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -272,7 +289,7 @@ public class CreateTaskLists extends javax.swing.JDialog {
                 .addComponent(lblDescriptionWarning, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 1032, -1));
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 620, 110));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

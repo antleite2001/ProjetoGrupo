@@ -122,7 +122,7 @@ public class RepositoryUsers {
         s = "";
 
         for (TaskList tl : TaskLists) {
-            if (tl.getCreatedBy() == UserId) {
+            if (tl.getOwnerId() == UserId) {
                 s = s + tl.getTitle() + " ";
                 userExists = true;
 

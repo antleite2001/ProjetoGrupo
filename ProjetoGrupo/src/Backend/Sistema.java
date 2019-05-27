@@ -22,30 +22,35 @@ public class Sistema {
         this.repositoryTasks = new RepositoryTasks();
         this.RepositoryUserProjectsAssociation = new RepositoryUserProjectsAssociation();
 
-        int userid1 = this.reporitoryUsers.addUser("José Álvaro", "josealvaro@gmail.com", "123456");
-        int userid2 = this.reporitoryUsers.addUser("Antonio Leite", "antonioleite@gmail.com", "123456");
-        int userid3 = this.reporitoryUsers.addUser("Paula Leite", "paulaleite@gmail.com", "123456");
+        int JoseAlvaro = this.reporitoryUsers.addUser("JoseAlvaro", "JoseAlvaro@gmail.com", "123456");
+        int AntonioSilva = this.reporitoryUsers.addUser("AntonioSilva", "AntonioSilva@gmail.com", "123456");
+        int ManuelSilva = this.reporitoryUsers.addUser("ManuelSilva", "ManuelSilva@gmail.com", "123456");
+        int InesSilva = this.reporitoryUsers.addUser("InesSilva", "InesSilva@gmail.com", "123456");
+        int PedroSilva = this.reporitoryUsers.addUser("PedroSilva", "PedroSilva@gmail.com", "123456");
 
-        //Projects Repository
-        int p1 = 1;
-        int p2 = 1;
-        int p3 = 1;
-        int p4 = 1;
+//Projects Repository
+        int p1JoseAlvaro = 1;
+        int p2ManuelSilva = 1;
+        int p3JoseAlvaro = 1;
+        /*int p4 = 1;
         int p5 = 1;
-        int p6 = 1;
+        int p6 = 1;*/
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy");
         try {
-            p1 = repositoryProjects.addProject(userid1, "P1 jose alvaro", "P1",
+            p1JoseAlvaro = repositoryProjects.addProject(JoseAlvaro, "P1", "P1",
                     formatter.parse("22-May-2019"),
-                    formatter.parse("23-May-2019"), RepositoryUserProjectsAssociation);
-            p2 = repositoryProjects.addProject(userid1, "P2 jose alvaro", "P2",
-                    formatter.parse("24-May-2019"), formatter.parse("25-May-2019"),
+                    formatter.parse("23-May-2019"),
                     RepositoryUserProjectsAssociation);
-            p3 = repositoryProjects.addProject(userid1, "P3 jose alvaro", "P3",
-                    formatter.parse("26-May-2019"), formatter.parse("27-May-2019"),
+            p2ManuelSilva = repositoryProjects.addProject(ManuelSilva, "P2", "P2",
+                    formatter.parse("24-May-2019"),
+                    formatter.parse("25-May-2019"),
+                    RepositoryUserProjectsAssociation);
+            p3JoseAlvaro = repositoryProjects.addProject(JoseAlvaro, "P3", "P3",
+                    formatter.parse("26-May-2019"),
+                    formatter.parse("27-May-2019"),
                     RepositoryUserProjectsAssociation);
 
-            p4 = repositoryProjects.addProject(userid2, "P1 antonio leite", "P1",
+            /* p4 = repositoryProjects.addProject(userid2, "P1 antonio leite", "P1",
                     formatter.parse("22-May-2019"), formatter.parse("22-May-2019"),
                     RepositoryUserProjectsAssociation);
             p5 = repositoryProjects.addProject(userid2, "P2 antonio leite", "P2",
@@ -53,18 +58,22 @@ public class Sistema {
                     RepositoryUserProjectsAssociation);
             p6 = repositoryProjects.addProject(userid2, "P3 antonio leite", "P3",
                     formatter.parse("22-May-2019"), formatter.parse("22-May-2019"),
-                    RepositoryUserProjectsAssociation);
-
+                    RepositoryUserProjectsAssociation);*/
         } catch (ParseException e) {
             e.printStackTrace();
-            //System.out.println("SISTEMA-ERROR:" + e.getMessage());
+            System.out.println("SISTEMA-ERROR:" + e.getMessage());
         }
 
-        //Associations Users Project
-        RepositoryUserProjectsAssociation.addUserProjectsAssociation(userid2, p1, userid1);
-        //RepositoryUserProjectsAssociation.addUserProjectsAssociation(userid3, p2, userid1);
-        //RepositoryUserProjectsAssociation.addUserProjectsAssociation(userid2, p3, userid1);
         
+        //Associations Users Project                                 userid, projectid projectOwner
+        RepositoryUserProjectsAssociation.addUserProjectsAssociation(AntonioSilva, p1JoseAlvaro, JoseAlvaro);
+        RepositoryUserProjectsAssociation.addUserProjectsAssociation(InesSilva, p2ManuelSilva, ManuelSilva);
+        RepositoryUserProjectsAssociation.addUserProjectsAssociation(InesSilva, p1JoseAlvaro, JoseAlvaro);
+        RepositoryUserProjectsAssociation.addUserProjectsAssociation(JoseAlvaro, p2ManuelSilva, ManuelSilva);
+        RepositoryUserProjectsAssociation.addUserProjectsAssociation(PedroSilva, p1JoseAlvaro, JoseAlvaro);
+        RepositoryUserProjectsAssociation.addUserProjectsAssociation(PedroSilva, p3JoseAlvaro, JoseAlvaro);
+        
+        /*
         //task List repository
         //ProjectId, String Title, String Description, int CreatedBy
         int taskList1
@@ -89,9 +98,7 @@ public class Sistema {
                 TaskStatus.FINISHED, 
                 new Date(System.currentTimeMillis()), 
                 taskList1, 
-                userid2);
-
-        
+                userid2);*/
     }
 
     public RepositoryTasks getRepositoryTasks() {

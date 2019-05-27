@@ -210,6 +210,7 @@ public class AssociateUserToProjects extends javax.swing.JDialog {
         btnExit.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         btnExit.setForeground(new java.awt.Color(255, 255, 255));
         btnExit.setText("Sair");
+        btnExit.setBorder(null);
         btnExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnExitActionPerformed(evt);
@@ -220,6 +221,7 @@ public class AssociateUserToProjects extends javax.swing.JDialog {
         btnAssociateUserToProjects.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         btnAssociateUserToProjects.setForeground(new java.awt.Color(255, 255, 255));
         btnAssociateUserToProjects.setText("Associar Utilizador a Projeto(s)");
+        btnAssociateUserToProjects.setBorder(null);
         btnAssociateUserToProjects.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAssociateUserToProjectsActionPerformed(evt);
@@ -236,10 +238,10 @@ public class AssociateUserToProjects extends javax.swing.JDialog {
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnAssociateUserToProjects)
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnAssociateUserToProjects, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnExit)))
+                        .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(

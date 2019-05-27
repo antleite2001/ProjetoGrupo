@@ -25,7 +25,7 @@ public class RepositoryTaskLists {
       
         for (TaskList t : ListaDeTarefas)
         {
-            if (t.getCreatedBy()==ownerid)
+            if (t.getOwnerId()==ownerid)
             {
                 lt.add(t);
             }

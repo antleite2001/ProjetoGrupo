@@ -21,10 +21,8 @@ public class CreateProject extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.s = s;
-        this.setTitle("Criar Projeto - " + s.getCurrentUser().getUserName() + " (" + s.getCurrentUser().getEmail() + ")");
-         
-         
-         
+        Validacoes.SetDialogProperties(this, s, 660, 660, "Criar Projeto");
+
         EnablebtnCreateproject();
 
         txtProjectDescription.getDocument().addDocumentListener(new DocumentListener() {
@@ -103,14 +101,14 @@ public class CreateProject extends javax.swing.JDialog {
 
         long enddate = 1 + (calEndDate.getDateInMillis() / (1000 * 60 * 60 * 24));
 
-//        long currentdate = System.currentTimeMillis() / (1000 * 60 * 60 * 24);
+        long currentdate = System.currentTimeMillis() / (1000 * 60 * 60 * 24);
 
-//        if (startdate < currentdate) {
-//            b = false;
-//            lblStartDateWarning.setText("Data de início do projeto deve ser igual ou superior à data atual");
-//        } else {
-//            lblStartDateWarning.setText("");
-//        }
+        if (startdate < currentdate) {
+            b = false;
+            lblStartDateWarning.setText("Data de início do projeto deve ser igual ou superior à data atual");
+        } else {
+            lblStartDateWarning.setText("");
+        }
 
         if (enddate < startdate) {
 
@@ -143,6 +141,7 @@ public class CreateProject extends javax.swing.JDialog {
         lblTitleWarning = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         calStartDate = new org.jdesktop.swingx.JXDatePicker();
+        lblStartDateWarning = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         calEndDate = new org.jdesktop.swingx.JXDatePicker();
         lblEndDateWarning = new javax.swing.JLabel();
@@ -151,25 +150,39 @@ public class CreateProject extends javax.swing.JDialog {
         setTitle("Criar Projeto");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnCancel.setText("Cancelar");
+        btnCancel.setBackground(new java.awt.Color(51, 110, 123));
+        btnCancel.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        btnCancel.setForeground(new java.awt.Color(255, 255, 255));
+        btnCancel.setText("Sair");
+        btnCancel.setBorder(null);
         btnCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelActionPerformed(evt);
             }
         });
-        getContentPane().add(btnCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 510, -1, 46));
+        getContentPane().add(btnCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 531, 200, 46));
 
+        btnCreateProject.setBackground(new java.awt.Color(51, 110, 123));
+        btnCreateProject.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        btnCreateProject.setForeground(new java.awt.Color(255, 255, 255));
         btnCreateProject.setText("Criar Projeto");
+        btnCreateProject.setBorder(null);
         btnCreateProject.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCreateProjectActionPerformed(evt);
             }
         });
-        getContentPane().add(btnCreateProject, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 510, -1, 46));
+        getContentPane().add(btnCreateProject, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 530, 200, 46));
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Descrição"));
+        jPanel5.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
 
+        lblDescriptionWarning.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
+        lblDescriptionWarning.setForeground(new java.awt.Color(255, 0, 0));
         lblDescriptionWarning.setText("lblDescriptionWarning");
+
+        txtProjectDescription.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        txtProjectDescription.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -178,29 +191,32 @@ public class CreateProject extends javax.swing.JDialog {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblDescriptionWarning, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(lblDescriptionWarning, javax.swing.GroupLayout.DEFAULT_SIZE, 591, Short.MAX_VALUE)
-                        .addContainerGap())
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(txtProjectDescription)
-                        .addGap(27, 27, 27))))
+                        .addComponent(txtProjectDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 588, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(txtProjectDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblDescriptionWarning, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblDescriptionWarning, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(215, 215, 215))
         );
 
-        getContentPane().add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 148, -1, 107));
+        getContentPane().add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 620, 110));
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Título"));
+        jPanel4.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
 
+        txtProjectTitle.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        txtProjectTitle.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
         txtProjectTitle.setPreferredSize(new java.awt.Dimension(30, 20));
 
+        lblTitleWarning.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
+        lblTitleWarning.setForeground(new java.awt.Color(255, 0, 0));
         lblTitleWarning.setText("lblTitleWarning");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -208,28 +224,33 @@ public class CreateProject extends javax.swing.JDialog {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(txtProjectTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(lblTitleWarning, javax.swing.GroupLayout.DEFAULT_SIZE, 588, Short.MAX_VALUE)))
+                    .addComponent(txtProjectTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblTitleWarning, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 588, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(txtProjectTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblTitleWarning, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblTitleWarning, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, 620, -1));
+        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, 110));
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Data de Início"));
+        jPanel3.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+
+        calStartDate.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        calStartDate.setPreferredSize(new java.awt.Dimension(200, 22));
+
+        lblStartDateWarning.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
+        lblStartDateWarning.setForeground(new java.awt.Color(255, 0, 0));
+        lblStartDateWarning.setText("lblStartDateWarning");
+        lblStartDateWarning.setMinimumSize(new java.awt.Dimension(209, 20));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -237,21 +258,30 @@ public class CreateProject extends javax.swing.JDialog {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(calStartDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(474, Short.MAX_VALUE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblStartDateWarning, javax.swing.GroupLayout.PREFERRED_SIZE, 588, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(calStartDate, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(calStartDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblStartDateWarning, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, 620, 70));
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, 620, 110));
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Data de Fim"));
+        jPanel2.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
 
+        calEndDate.setPreferredSize(new java.awt.Dimension(200, 22));
+
+        lblEndDateWarning.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
+        lblEndDateWarning.setForeground(new java.awt.Color(255, 0, 0));
         lblEndDateWarning.setText("lblEndDateWarning");
         lblEndDateWarning.setMinimumSize(new java.awt.Dimension(209, 20));
 
@@ -262,11 +292,9 @@ public class CreateProject extends javax.swing.JDialog {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(calEndDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 464, Short.MAX_VALUE))
-                    .addComponent(lblEndDateWarning, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                    .addComponent(lblEndDateWarning, javax.swing.GroupLayout.PREFERRED_SIZE, 588, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(calEndDate, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -274,11 +302,11 @@ public class CreateProject extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(calEndDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblEndDateWarning, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12))
+                .addComponent(lblEndDateWarning, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(53, 53, 53))
         );
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 330, 620, -1));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 400, 620, 110));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -288,11 +316,11 @@ public class CreateProject extends javax.swing.JDialog {
     }//GEN-LAST:event_btnCancelActionPerformed
 
     private void btnCreateProjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateProjectActionPerformed
-        int p = s.getRepositoryProjects().addProject(s.getCurrentUser().getUserId(), 
-                txtProjectTitle.getText(), txtProjectDescription.getText(), 
+        int p = s.getRepositoryProjects().addProject(s.getCurrentUser().getUserId(),
+                txtProjectTitle.getText(), txtProjectDescription.getText(),
                 calStartDate.getDate(), calEndDate.getDate(),
                 s.getRepositoryUserProjectsAssociation());
-        
+
         JOptionPane.showMessageDialog(null, "O projeto " + txtProjectTitle.getText() + " foi criado com sucesso!");
 
         this.dispose();
@@ -353,6 +381,7 @@ public class CreateProject extends javax.swing.JDialog {
     private org.jdesktop.swingx.JXDatePicker jXDatePicker1;
     private javax.swing.JLabel lblDescriptionWarning;
     private javax.swing.JLabel lblEndDateWarning;
+    private javax.swing.JLabel lblStartDateWarning;
     private javax.swing.JLabel lblTitleWarning;
     private javax.swing.JTextField txtProjectDescription;
     private javax.swing.JTextField txtProjectTitle;
