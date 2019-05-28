@@ -45,11 +45,7 @@ public class RepositoryTasks {
             if(t.getTaskId()==TaskId)
             {
                 t.setEstado(newTaskStatus);
-                if(newTaskStatus == TaskStatus.FINISHED)
-                {
-                    t.setEndDate(new Calendar().get);
-                    
-                }
+                 
                 return true;
             }
         }
@@ -69,6 +65,22 @@ public class RepositoryTasks {
     public void removeTask(Task tarefa) {
         Tasks.remove(tarefa);
     }
+    
+    public void updateTaskStatusByIdandDate
+    (int TaskId, TaskStatus newTaskStatus, Date d)
+    {
+        for(Task t : Tasks)
+        {
+            if(t.getTaskId()==TaskId)
+            {
+                t.setEstado(newTaskStatus);
+                t.setEndDate(d);
+                
+            }
+        }
+    }
+    
+
 
     @Override
     public String toString() {

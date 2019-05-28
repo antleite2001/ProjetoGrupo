@@ -33,4 +33,9 @@ public class Validacoes {
         dialog.setTitle(menuText +  " - "+ s.getCurrentUser().getUserName() + " (" + s.getCurrentUser().getEmail() + ")");
 
     }
+    
+    public static void print(Object s)
+    {
+        System.out.println(s);
+    }
 }
