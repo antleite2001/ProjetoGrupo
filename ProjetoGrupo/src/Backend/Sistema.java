@@ -32,9 +32,7 @@ public class Sistema {
         int p1JoseAlvaro = 1;
         int p2ManuelSilva = 1;
         int p3JoseAlvaro = 1;
-        /*int p4 = 1;
-        int p5 = 1;
-        int p6 = 1;*/
+
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy");
         try {
             p1JoseAlvaro = repositoryProjects.addProject(JoseAlvaro, "P1", "P1",
@@ -50,21 +48,11 @@ public class Sistema {
                     formatter.parse("27-May-2019"),
                     RepositoryUserProjectsAssociation);
 
-            /* p4 = repositoryProjects.addProject(userid2, "P1 antonio leite", "P1",
-                    formatter.parse("22-May-2019"), formatter.parse("22-May-2019"),
-                    RepositoryUserProjectsAssociation);
-            p5 = repositoryProjects.addProject(userid2, "P2 antonio leite", "P2",
-                    formatter.parse("22-May-2019"), formatter.parse("22-May-2019"),
-                    RepositoryUserProjectsAssociation);
-            p6 = repositoryProjects.addProject(userid2, "P3 antonio leite", "P3",
-                    formatter.parse("22-May-2019"), formatter.parse("22-May-2019"),
-                    RepositoryUserProjectsAssociation);*/
         } catch (ParseException e) {
             e.printStackTrace();
             System.out.println("SISTEMA-ERROR:" + e.getMessage());
         }
 
-        
         //Associations Users Project                                 userid, projectid projectOwner
         RepositoryUserProjectsAssociation.addUserProjectsAssociation(AntonioSilva, p1JoseAlvaro, JoseAlvaro);
         RepositoryUserProjectsAssociation.addUserProjectsAssociation(InesSilva, p2ManuelSilva, ManuelSilva);
@@ -72,33 +60,54 @@ public class Sistema {
         RepositoryUserProjectsAssociation.addUserProjectsAssociation(JoseAlvaro, p2ManuelSilva, ManuelSilva);
         RepositoryUserProjectsAssociation.addUserProjectsAssociation(PedroSilva, p1JoseAlvaro, JoseAlvaro);
         RepositoryUserProjectsAssociation.addUserProjectsAssociation(PedroSilva, p3JoseAlvaro, JoseAlvaro);
-        
-        /*
+
         //task List repository
         //ProjectId, String Title, String Description, int CreatedBy
-        int taskList1
-                = repositoryTaskLists.addTaskList(p1, "TL1", "TaskDesc1", userid1);
-        repositoryTaskLists.addTaskList(p1, "TL2", "TaskDesc2", userid1);
-
-        repositoryTaskLists.addTaskList(p2, "TL3", "TaskDesc3", userid1);
-        repositoryTaskLists.addTaskList(p3, "TL4", "TaskDesc4", userid1);
-        repositoryTaskLists.addTaskList(p2, "TL5", "TaskDesc5", userid1);
-
-        repositoryTaskLists.addTaskList(p1, "TL6", "TaskDesc6", userid1);
-        repositoryTaskLists.addTaskList(p1, "TL7", "TaskDesc7", userid1);
-        repositoryTaskLists.addTaskList(p1, "TL8", "TaskDesc8", userid1);
+        int tasklist1 = repositoryTaskLists.addTaskList(p1JoseAlvaro, "TL1", "TaskDesc1", JoseAlvaro);
+        int tasklist2 = repositoryTaskLists.addTaskList(p2ManuelSilva, "TL2", "TaskDesc2", ManuelSilva);
+        int tasklist3 = repositoryTaskLists.addTaskList(p1JoseAlvaro, "TL3", "TaskDesc3", JoseAlvaro);
+        int tasklist4 = repositoryTaskLists.addTaskList(p2ManuelSilva, "TL4", "TaskDesc4", ManuelSilva);
+        int tasklist5 = repositoryTaskLists.addTaskList(p3JoseAlvaro, "TL5", "TaskDesc5", JoseAlvaro);
 
         //Tasks CreatedBy,   Title,   Description,   priority, Status, 
         //  DataDeInicio,   TaskListId,   assignedTo
-        repositoryTasks.addTask(userid1, "Task1", "Task1 description", TaskPriority.LOW, TaskStatus.NOTSTARTED, new Date(System.currentTimeMillis()), taskList1, userid1);
-        repositoryTasks.addTask(userid1, "Task2", "Task3 description", TaskPriority.MEDIUM, TaskStatus.INPROGRESS, new Date(System.currentTimeMillis()), taskList1, userid1);
-        repositoryTasks.addTask(userid1, "Task3", "Task3 description", TaskPriority.HIGH, TaskStatus.FINISHED, new Date(System.currentTimeMillis()), taskList1, userid1);
-        repositoryTasks.addTask(userid1, "Task4", "Task4 description", 
-                TaskPriority.HIGH, 
-                TaskStatus.FINISHED, 
-                new Date(System.currentTimeMillis()), 
-                taskList1, 
-                userid2);*/
+        repositoryTasks.addTask(JoseAlvaro, "Task1", "Task1 description", TaskPriority.LOW, TaskStatus.NOTSTARTED, new Date(System.currentTimeMillis()), tasklist1, JoseAlvaro);
+        repositoryTasks.addTask(JoseAlvaro, "Task2", "Task2 description", TaskPriority.MEDIUM, TaskStatus.NOTSTARTED, new Date(System.currentTimeMillis()), tasklist1, JoseAlvaro);
+        repositoryTasks.addTask(JoseAlvaro, "Task3", "Task3 description", TaskPriority.HIGH, TaskStatus.NOTSTARTED, new Date(System.currentTimeMillis()), tasklist1, JoseAlvaro);
+        repositoryTasks.addTask(JoseAlvaro, "Task4", "Task4 description", TaskPriority.HIGH, TaskStatus.NOTSTARTED, new Date(System.currentTimeMillis()), tasklist1, JoseAlvaro);
+        repositoryTasks.addTask(JoseAlvaro, "Task5", "Task5 description", TaskPriority.LOW, TaskStatus.NOTSTARTED, new Date(System.currentTimeMillis()), tasklist1, AntonioSilva);
+        repositoryTasks.addTask(JoseAlvaro, "Task6", "Task6 description", TaskPriority.MEDIUM, TaskStatus.NOTSTARTED, new Date(System.currentTimeMillis()), tasklist1, AntonioSilva);
+        repositoryTasks.addTask(JoseAlvaro, "Task7", "Task7 description", TaskPriority.HIGH, TaskStatus.NOTSTARTED, new Date(System.currentTimeMillis()), tasklist1, AntonioSilva);
+        repositoryTasks.addTask(JoseAlvaro, "Task8", "Task8 description", TaskPriority.HIGH, TaskStatus.NOTSTARTED, new Date(System.currentTimeMillis()), tasklist1, AntonioSilva);
+        repositoryTasks.addTask(JoseAlvaro, "Task9", "Task9 description", TaskPriority.HIGH, TaskStatus.NOTSTARTED, new Date(System.currentTimeMillis()), tasklist1, InesSilva);
+        repositoryTasks.addTask(JoseAlvaro, "Task10", "Task10 description", TaskPriority.HIGH, TaskStatus.NOTSTARTED, new Date(System.currentTimeMillis()), tasklist1, PedroSilva);
+ //11
+        repositoryTasks.addTask(ManuelSilva, "Task11", "Task11 description", TaskPriority.LOW, TaskStatus.NOTSTARTED, new Date(System.currentTimeMillis()), tasklist2, JoseAlvaro);
+        repositoryTasks.addTask(ManuelSilva, "Task12", "Task12 description", TaskPriority.MEDIUM, TaskStatus.NOTSTARTED, new Date(System.currentTimeMillis()), tasklist2, JoseAlvaro);
+        repositoryTasks.addTask(ManuelSilva, "Task13", "Task13 description", TaskPriority.HIGH, TaskStatus.NOTSTARTED, new Date(System.currentTimeMillis()), tasklist2, ManuelSilva);
+        repositoryTasks.addTask(ManuelSilva, "Task14", "Task14 description", TaskPriority.HIGH, TaskStatus.NOTSTARTED, new Date(System.currentTimeMillis()), tasklist2, ManuelSilva);
+        repositoryTasks.addTask(ManuelSilva, "Task15", "Task15 description", TaskPriority.LOW, TaskStatus.NOTSTARTED, new Date(System.currentTimeMillis()), tasklist2, ManuelSilva);
+        repositoryTasks.addTask(ManuelSilva, "Task16", "Task16 description", TaskPriority.MEDIUM, TaskStatus.NOTSTARTED, new Date(System.currentTimeMillis()), tasklist2, ManuelSilva);
+        repositoryTasks.addTask(ManuelSilva, "Task17", "Task17 description", TaskPriority.HIGH, TaskStatus.NOTSTARTED, new Date(System.currentTimeMillis()), tasklist2, InesSilva);
+        repositoryTasks.addTask(ManuelSilva, "Task18", "Task18 description", TaskPriority.HIGH, TaskStatus.NOTSTARTED, new Date(System.currentTimeMillis()), tasklist2, InesSilva);
+        repositoryTasks.addTask(ManuelSilva, "Task19", "Task19 description", TaskPriority.HIGH, TaskStatus.NOTSTARTED, new Date(System.currentTimeMillis()), tasklist2, InesSilva);
+        repositoryTasks.addTask(ManuelSilva, "Task20", "Task20 description", TaskPriority.HIGH, TaskStatus.NOTSTARTED, new Date(System.currentTimeMillis()), tasklist2, InesSilva);
+ //21
+        repositoryTasks.addTask(JoseAlvaro, "Task21", "Task21 description", TaskPriority.LOW, TaskStatus.NOTSTARTED, new Date(System.currentTimeMillis()), tasklist3, JoseAlvaro);
+        repositoryTasks.addTask(JoseAlvaro, "Task22", "Task22 description", TaskPriority.MEDIUM, TaskStatus.NOTSTARTED, new Date(System.currentTimeMillis()), tasklist3, InesSilva);
+        repositoryTasks.addTask(JoseAlvaro, "Task23", "Task23 description", TaskPriority.HIGH, TaskStatus.NOTSTARTED, new Date(System.currentTimeMillis()), tasklist3, InesSilva);
+        repositoryTasks.addTask(JoseAlvaro, "Task24", "Task24 description", TaskPriority.HIGH, TaskStatus.NOTSTARTED, new Date(System.currentTimeMillis()), tasklist3, AntonioSilva);
+        repositoryTasks.addTask(JoseAlvaro, "Task25", "Task25 description", TaskPriority.LOW, TaskStatus.NOTSTARTED, new Date(System.currentTimeMillis()), tasklist3, PedroSilva);
+        
+        repositoryTasks.addTask(ManuelSilva, "Task26", "Task26 description", TaskPriority.MEDIUM, TaskStatus.NOTSTARTED, new Date(System.currentTimeMillis()), tasklist4, JoseAlvaro);
+        repositoryTasks.addTask(ManuelSilva, "Task27", "Task27 description", TaskPriority.HIGH, TaskStatus.NOTSTARTED, new Date(System.currentTimeMillis()), tasklist4, ManuelSilva);
+        repositoryTasks.addTask(ManuelSilva, "Task28", "Task28 description", TaskPriority.HIGH, TaskStatus.NOTSTARTED, new Date(System.currentTimeMillis()), tasklist4, InesSilva);
+        repositoryTasks.addTask(ManuelSilva, "Task29", "Task29 description", TaskPriority.HIGH, TaskStatus.NOTSTARTED, new Date(System.currentTimeMillis()), tasklist4, InesSilva);
+        repositoryTasks.addTask(ManuelSilva, "Task30", "Task30 description", TaskPriority.HIGH, TaskStatus.NOTSTARTED, new Date(System.currentTimeMillis()), tasklist4, InesSilva);
+
+        repositoryTasks.addTask(JoseAlvaro, "Task31", "Task31 description", TaskPriority.HIGH, TaskStatus.NOTSTARTED, new Date(System.currentTimeMillis()), tasklist5, JoseAlvaro);
+        repositoryTasks.addTask(JoseAlvaro, "Task32", "Task32 description", TaskPriority.HIGH, TaskStatus.NOTSTARTED, new Date(System.currentTimeMillis()), tasklist5, PedroSilva);
+
     }
 
     public RepositoryTasks getRepositoryTasks() {

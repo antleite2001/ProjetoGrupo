@@ -20,16 +20,20 @@ import javax.swing.table.DefaultTableModel;
  * @author ACVL
  */
 public class ChangeTaskList extends javax.swing.JDialog {
+
     Sistema s;
- DefaultTableModel modelTaskList;
+    DefaultTableModel modelTaskList;
+
     /**
      * Creates new form ChangeTaskList
      */
     public ChangeTaskList(java.awt.Frame parent, boolean modal, Sistema s) {
         super(parent, modal);
         initComponents();
-        this.s=s;
-        
+        this.s = s;
+
+        Validacoes.SetDialogProperties(this, s, 900, 600, "Editar Lista de Tarefas");
+
         //set jtable selection to single row------------------------------------------------------------
         tableTaskList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
@@ -38,9 +42,9 @@ public class ChangeTaskList extends javax.swing.JDialog {
 
         //create modelProjectsOwnedByUser to handle columns and rows
         modelTaskList = new DefaultTableModel();
-        modelTaskList.addColumn("Id da Task List");
-        modelTaskList.addColumn("Título da TaskList");
-        modelTaskList.addColumn("Descrição da TaskList");
+        modelTaskList.addColumn("Id da Lista de Tarefas");
+        modelTaskList.addColumn("Título da Lista de Tarefas");
+        modelTaskList.addColumn("Descrição da Lista de Tarefas");
         tableTaskList.setModel(modelTaskList);
 
         ArrayList<TaskList> TaskListsbyOwner = new ArrayList<>();
@@ -58,20 +62,20 @@ public class ChangeTaskList extends javax.swing.JDialog {
             });
 
         }
-        tbTitle.setText("");
-        tbDescription.setText("");
+        tbTaskListTitle.setText("");
+        tbTaskListDescription.setText("");
         enablebtnUpdate();
-        
+
         //Events
         tableTaskList.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent event) {
                 SelectTaskList();
-                 
+
             }
         });
         //TextBox events
-        tbTitle.getDocument().addDocumentListener(new DocumentListener() {
+        tbTaskListTitle.getDocument().addDocumentListener(new DocumentListener() {
 
             @Override
             public void changedUpdate(DocumentEvent arg0) {
@@ -88,9 +92,8 @@ public class ChangeTaskList extends javax.swing.JDialog {
                 enablebtnUpdate();
             }
         });
-            
-        
-            tbDescription.getDocument().addDocumentListener(new DocumentListener() {
+
+        tbTaskListDescription.getDocument().addDocumentListener(new DocumentListener() {
 
             @Override
             public void changedUpdate(DocumentEvent arg0) {
@@ -108,11 +111,13 @@ public class ChangeTaskList extends javax.swing.JDialog {
             }
         });
     }
-void SelectTaskList (){
 
-    tbTitle.setText((String) tableTaskList.getValueAt(tableTaskList.getSelectedRow() ,1));
-    tbDescription.setText((String) tableTaskList.getValueAt(tableTaskList.getSelectedRow() ,2));
-}
+    void SelectTaskList() {
+
+        tbTaskListTitle.setText((String) tableTaskList.getValueAt(tableTaskList.getSelectedRow(), 1));
+        tbTaskListDescription.setText((String) tableTaskList.getValueAt(tableTaskList.getSelectedRow(), 2));
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -125,14 +130,18 @@ void SelectTaskList (){
         panelProjectsOwnedByUser = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableTaskList = new javax.swing.JTable();
-        tbTitle = new javax.swing.JTextField();
-        tbDescription = new javax.swing.JTextField();
         btnExit = new javax.swing.JButton();
         btnUpdate = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        tbTaskListTitle = new javax.swing.JTextField();
+        lblTitleWarning = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        tbTaskListDescription = new javax.swing.JTextField();
+        lblDescriptionWarning = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        panelProjectsOwnedByUser.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        panelProjectsOwnedByUser.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Lista de Tarefas", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Calibri", 0, 18))); // NOI18N
 
         tableTaskList.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         tableTaskList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -144,104 +153,164 @@ void SelectTaskList (){
             panelProjectsOwnedByUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelProjectsOwnedByUserLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 603, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 848, Short.MAX_VALUE)
                 .addContainerGap())
         );
         panelProjectsOwnedByUserLayout.setVerticalGroup(
             panelProjectsOwnedByUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelProjectsOwnedByUserLayout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        tbTitle.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tbTitleActionPerformed(evt);
-            }
-        });
-
+        btnExit.setBackground(new java.awt.Color(51, 110, 123));
+        btnExit.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        btnExit.setForeground(new java.awt.Color(255, 255, 255));
         btnExit.setText("Cancelar");
+        btnExit.setBorder(null);
         btnExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnExitActionPerformed(evt);
             }
         });
 
+        btnUpdate.setBackground(new java.awt.Color(51, 110, 123));
+        btnUpdate.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        btnUpdate.setForeground(new java.awt.Color(255, 255, 255));
         btnUpdate.setText("Guardar");
+        btnUpdate.setBorder(null);
         btnUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnUpdateActionPerformed(evt);
             }
         });
 
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Título da Lista de Tarefas"));
+
+        tbTaskListTitle.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        tbTaskListTitle.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        tbTaskListTitle.setPreferredSize(new java.awt.Dimension(30, 20));
+
+        lblTitleWarning.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
+        lblTitleWarning.setForeground(new java.awt.Color(255, 0, 0));
+        lblTitleWarning.setText("lblTitleWarning");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tbTaskListTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblTitleWarning, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(tbTaskListTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblTitleWarning, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Descrição da Lista de Tarefas"));
+
+        tbTaskListDescription.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        tbTaskListDescription.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+
+        lblDescriptionWarning.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
+        lblDescriptionWarning.setForeground(new java.awt.Color(255, 0, 0));
+        lblDescriptionWarning.setText("lblDescriptionWarning");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tbTaskListDescription)
+                    .addComponent(lblDescriptionWarning, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addComponent(tbTaskListDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblDescriptionWarning, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tbTitle)
-                    .addComponent(tbDescription)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 443, Short.MAX_VALUE)
-                        .addComponent(btnExit)
-                        .addGap(34, 34, 34)
-                        .addComponent(btnUpdate)))
-                .addContainerGap())
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(panelProjectsOwnedByUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addContainerGap()))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(440, 440, 440)
+                        .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20)
+                        .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(250, Short.MAX_VALUE)
-                .addComponent(tbTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
-                .addComponent(tbDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnExit)
-                    .addComponent(btnUpdate))
-                .addGap(22, 22, 22))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(60, 60, 60)
-                    .addComponent(panelProjectsOwnedByUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(182, Short.MAX_VALUE)))
+                .addGap(11, 11, 11)
+                .addComponent(panelProjectsOwnedByUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tbTitleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbTitleActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tbTitleActionPerformed
-
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
-       this.dispose();
+        this.dispose();
     }//GEN-LAST:event_btnExitActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-    int i=(int)tableTaskList.getValueAt(tableTaskList.getSelectedRow() ,0);
-    tableTaskList.setValueAt(tbTitle.getText(), tableTaskList.getSelectedRow(), 1);
-    tableTaskList.setValueAt(tbDescription.getText(), tableTaskList.getSelectedRow(), 2);
-    s.getRepositoryTaskLists().updatebytasklistid(i, tbTitle.getText(), tbDescription.getText());
-    JOptionPane.showMessageDialog(null, "A TaskList foi actualizada com sucesso!");
+        int i = (int) tableTaskList.getValueAt(tableTaskList.getSelectedRow(), 0);
+        tableTaskList.setValueAt(tbTaskListTitle.getText(), tableTaskList.getSelectedRow(), 1);
+        tableTaskList.setValueAt(tbTaskListDescription.getText(), tableTaskList.getSelectedRow(), 2);
+        s.getRepositoryTaskLists().updatebytasklistid(i, tbTaskListTitle.getText(), tbTaskListDescription.getText());
+        JOptionPane.showMessageDialog(null, "A Lista de Tarefas foi actualizada com sucesso!");
+        this.dispose();
     }//GEN-LAST:event_btnUpdateActionPerformed
-void enablebtnUpdate(){
-    if (tbTitle.getText().isBlank() || tbDescription.getText().isBlank())
-    {
-        btnUpdate.setEnabled (false);
+    void enablebtnUpdate() {
+        boolean b = true;
+        if (tbTaskListTitle.getText().isBlank()) {
+            lblTitleWarning.setText("Introduza o novo Título para a Lista de Tarefas");
+            b = false;
+        } else {
+            lblTitleWarning.setText("");
+        }
+
+        if (tbTaskListDescription.getText().isBlank()) {
+            lblDescriptionWarning.setText("Introduza a nove descrição para a Lista de Tarefas");
+            b = false;
+        } else {
+            lblDescriptionWarning.setText("");
+        }
+        btnUpdate.setEnabled(b);
     }
-    else
-    {
-        btnUpdate.setEnabled (true);
-    }
-}
     /**
      * @param args the command line arguments
      */
@@ -282,15 +351,19 @@ void enablebtnUpdate(){
 //                dialog.setVisible(true);
 //            }
 //        });
- //   }
+    //   }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnExit;
     private javax.swing.JButton btnUpdate;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblDescriptionWarning;
+    private javax.swing.JLabel lblTitleWarning;
     private javax.swing.JPanel panelProjectsOwnedByUser;
     private javax.swing.JTable tableTaskList;
-    private javax.swing.JTextField tbDescription;
-    private javax.swing.JTextField tbTitle;
+    private javax.swing.JTextField tbTaskListDescription;
+    private javax.swing.JTextField tbTaskListTitle;
     // End of variables declaration//GEN-END:variables
 }

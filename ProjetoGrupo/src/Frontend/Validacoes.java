@@ -26,9 +26,9 @@ public class Validacoes {
     }
 
     
-    public static void SetDialogProperties(JDialog dialog, Sistema s, int sizeX, int sizeY, String menuText)
+    public static void SetDialogProperties(JDialog dialog, Sistema s, int width, int height, String menuText)
     {        
-        dialog.setSize(new Dimension(sizeX, sizeY)); 
+        dialog.setSize(new Dimension(width, height)); 
         dialog.setResizable(false);   
         dialog.setTitle(menuText +  " - "+ s.getCurrentUser().getUserName() + " (" + s.getCurrentUser().getEmail() + ")");
 

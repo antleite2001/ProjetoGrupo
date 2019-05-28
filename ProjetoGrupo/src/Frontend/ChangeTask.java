@@ -34,7 +34,7 @@ public class ChangeTask extends javax.swing.JDialog {
         lbltableTaskWarning.setText("");
         lbltableUsersWarning.setText("");
         
-        Validacoes.SetDialogProperties(this, s, 970, 802, "Atualizar Tarefa");
+        Validacoes.SetDialogProperties(this, s, 970, 820, "Atualizar Tarefa");
 
         rbHighPriority.setSelected(false);
         rbMediumPriority.setSelected(false);
@@ -262,7 +262,7 @@ public class ChangeTask extends javax.swing.JDialog {
             lblStartDateWarning.setText("Data de início da tarefa deve ser igual ou superior à data atual");
             b = false;
         } else {
-            lblStartDateWarning.setText(" ");
+            lblStartDateWarning.setText("");
         }
 
         
@@ -327,13 +327,14 @@ public class ChangeTask extends javax.swing.JDialog {
         rbFinished = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Criar Tarefa");
+        setTitle("Editar Tarefa");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnCreateTask.setBackground(new java.awt.Color(51, 110, 123));
         btnCreateTask.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         btnCreateTask.setForeground(new java.awt.Color(255, 255, 255));
         btnCreateTask.setText("Atualizar Tarefa");
+        btnCreateTask.setBorder(null);
         btnCreateTask.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCreateTaskActionPerformed(evt);
@@ -345,6 +346,7 @@ public class ChangeTask extends javax.swing.JDialog {
         btnCancel.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         btnCancel.setForeground(new java.awt.Color(255, 255, 255));
         btnCancel.setText("Cancelar");
+        btnCancel.setBorder(null);
         btnCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelActionPerformed(evt);
@@ -384,10 +386,10 @@ public class ChangeTask extends javax.swing.JDialog {
                     .addComponent(rbLowPriority)
                     .addComponent(rbMediumPriority)
                     .addComponent(rbHighPriority))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 15, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, 370, -1));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, 370, 60));
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Atribuir Tarefa ao Utilizador"));
         jPanel3.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
@@ -440,7 +442,7 @@ public class ChangeTask extends javax.swing.JDialog {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(calStartDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 209, Short.MAX_VALUE))
+                        .addGap(0, 211, Short.MAX_VALUE))
                     .addComponent(lblStartDateWarning, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -558,7 +560,10 @@ public class ChangeTask extends javax.swing.JDialog {
         getContentPane().add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, -1, -1));
 
         jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder("Data de Fim"));
+        jPanel7.setEnabled(false);
         jPanel7.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
+
+        calEndDate.setEditable(false);
 
         lblEndDateWarning.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
         lblEndDateWarning.setForeground(new java.awt.Color(255, 0, 0));
@@ -573,7 +578,7 @@ public class ChangeTask extends javax.swing.JDialog {
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(calEndDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblEndDateWarning))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(221, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -587,16 +592,20 @@ public class ChangeTask extends javax.swing.JDialog {
         getContentPane().add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 390, 370, -1));
 
         jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder("Estado"));
+        jPanel8.setEnabled(false);
         jPanel8.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
 
         btngrpStatus.add(rbNotStarted);
         rbNotStarted.setText("Não Iniciada");
+        rbNotStarted.setEnabled(false);
 
         btngrpStatus.add(rbInProgress);
         rbInProgress.setText("Em Progresso");
+        rbInProgress.setEnabled(false);
 
         btngrpStatus.add(rbFinished);
         rbFinished.setText("Terminada");
+        rbFinished.setEnabled(false);
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -618,10 +627,10 @@ public class ChangeTask extends javax.swing.JDialog {
                     .addComponent(rbNotStarted)
                     .addComponent(rbInProgress)
                     .addComponent(rbFinished))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 15, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 320, 370, -1));
+        getContentPane().add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 320, 370, 60));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

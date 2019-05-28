@@ -6,22 +6,23 @@
 package Frontend;
 
 import Backend.*;
+import static java.awt.image.ImageObserver.ERROR;
 import java.util.ArrayList;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
-public class AssociateUserToProjects extends javax.swing.JDialog {
+public class DisplayAllUsers extends javax.swing.JDialog {
 
     Sistema s;
-    DefaultTableModel modelProjects, modelUsers;
+    DefaultTableModel modelUsers, modelAssociatedToprojects, modelTasksAssigned;
 
     //construtor
-    public AssociateUserToProjects(java.awt.Frame parent, boolean modal, Sistema s) {
+    public DisplayAllUsers(java.awt.Frame parent, boolean modal, Sistema s) {
         super(parent, modal);
         initComponents();
         this.s = s;
-        this.setTitle("Associar Utilizador a Projectos - " + s.getCurrentUser().getUserName() + " (" + s.getCurrentUser().getEmail() + ")");
+        Validacoes.SetDialogProperties(this, s, 900, 800, "Listar Todos os Utilizadores");
 
         //set jtable selection to single row
         tableUsers.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -40,88 +41,98 @@ public class AssociateUserToProjects extends javax.swing.JDialog {
 
         //Add rows to table with users info
         for (User u : s.getUsersRepository().getUsers()) {
-            if (s.getCurrentUser().getUserId() != u.getUserId()) {
+            modelUsers.addRow(new Object[]{
+                u.getUserId(),
+                u.getUserName(),
+                u.getEmail()
+            });
 
-                modelUsers.addRow(new Object[]{
-                    u.getUserId(),
-                    u.getUserName(),
-                    u.getEmail()
-                });
-            }
         }
 
-        //set jtable selection to multiple row selection
-        tableProjects.setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+        //Projects Associated--------------------------------------------------
+        //set jtable selection to single row
+        tableProjectsAssociated.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
         //prevent editing of jtable cells
-        tableProjects.setDefaultEditor(Object.class, null);
+        tableProjectsAssociated.setDefaultEditor(Object.class, null);
 
         //create model to handle columns and rows
-        modelProjects = new DefaultTableModel();
-        modelProjects.addColumn("Id do Projeto");
-        modelProjects.addColumn("Título do Projeto");
-        modelProjects.addColumn("Descrição do Projeto");
+        modelAssociatedToprojects = new DefaultTableModel();
+        modelAssociatedToprojects.addColumn("Título do Projeto");
+        modelAssociatedToprojects.addColumn("Descrição do projeto");
+        modelAssociatedToprojects.addColumn("Data de Início");
+        modelAssociatedToprojects.addColumn("Data de Fim");
+        //relate model to table
+        tableProjectsAssociated.setModel(modelAssociatedToprojects);
 
-        tableProjects.setModel(modelProjects);
+        //Tasks Assigned ------------------------------------------------------
+        //set jtable selection to single row
+        tableTasksAssigned.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
-        ArrayList<Project> ProjectsByOwner = new ArrayList<>();
+        //prevent editing of jtable cells
+        tableTasksAssigned.setDefaultEditor(Object.class, null);
 
-        //Select projects owned by current user (owner of projects)
-        ProjectsByOwner = s.getRepositoryProjects().getProjectsByOwner(s.getCurrentUser().getUserId());
-
-        //Add rows to table with projects info
-        for (Project p : ProjectsByOwner) {
-            modelProjects.addRow(new Object[]{
-                p.getProjectId(),
-                p.getProjectTitle(),
-                p.getProjectDescription()
-            });
-        }
-
-        EnablebtnAssociateUserToProjects();
-
-        //jtable project selection change event
-        tableProjects.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-            @Override
-            public void valueChanged(ListSelectionEvent event) {
-                EnablebtnAssociateUserToProjects();
-                if (tableProjects.getSelectedRow() > -1) {
-
-                }
-            }
-        });
-
-        //jtable user selection change event
+        //create model to handle columns and rows
+        modelTasksAssigned = new DefaultTableModel();
+        modelTasksAssigned.addColumn("Título da Tarefa");
+        modelTasksAssigned.addColumn("Descrição da Tarefa");
+        modelTasksAssigned.addColumn("Prioridade");
+        modelTasksAssigned.addColumn("Estado");
+        modelTasksAssigned.addColumn("Data de Início");
+        modelTasksAssigned.addColumn("Data de Fim");
+        //relate model to table
+        tableTasksAssigned.setModel(modelTasksAssigned);
+//jtable user selection change event
         tableUsers.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent event) {
-                EnablebtnAssociateUserToProjects();
-                if (tableUsers.getSelectedRow() > -1) {
 
+                //Clear tables
+                modelAssociatedToprojects.setRowCount(0);
+                modelTasksAssigned.setRowCount(0);
+
+                //Display Associated projects---------------------------------
+                int UserId = (Integer) tableUsers.getValueAt(tableUsers.getSelectedRow(), 0);
+                ArrayList<UserProjectsAssociation> ProjectsAssociatedToUser = s.getRepositoryUserProjectsAssociation().getUserProjectsAssociation(UserId);
+                for (UserProjectsAssociation projectsAssociatedToUser : ProjectsAssociatedToUser) {
+                    for (Project p : s.getRepositoryProjects().getProjects()) {
+                        if (p.getProjectId() == projectsAssociatedToUser.getProjectId()) {
+                            modelAssociatedToprojects.addRow(new Object[]{
+                                p.getProjectTitle(),
+                                p.getProjectDescription(),
+                                Validacoes.FormatDate(p.getStartDate()),
+                                Validacoes.FormatDate(p.getEndDate())
+                            });
+                        }
+                    }//for
+                }//for
+                //------------------------~
+                //Tasks Assigned----------------------------------------------
+                ArrayList<Task> tasksAssignedToUser = s.getRepositoryTasks().getTasksAssignedToUser(UserId);
+                for (Task t1 : tasksAssignedToUser) {
+
+                    if (t1.getEndDate() == null) {
+                        modelTasksAssigned.addRow(new Object[]{
+                            t1.getTitle(),
+                            t1.getDescription(),
+                            t1.getTaskPriority(),
+                            t1.getTaskStatus(),
+                            Validacoes.FormatDate(t1.getStartDate()),
+                            ""});
+                    } else {
+                        modelTasksAssigned.addRow(new Object[]{
+                            t1.getTitle(),
+                            t1.getDescription(),
+                            t1.getTaskPriority(),
+                            t1.getTaskStatus(),
+                            Validacoes.FormatDate(t1.getStartDate()),
+                            Validacoes.FormatDate(t1.getEndDate())});
+                    }
                 }
+                //----------------------
             }
         });
-    }
-
-    void EnablebtnAssociateUserToProjects() {
-        boolean b = true;
-
-        if (tableUsers.getSelectedRow() == -1) {
-            lbltableUsertWarning.setText("Selecione um utilizador");
-            b = false;
-        } else {
-            lbltableUsertWarning.setText("");
-        }
-
-        if (tableProjects.getSelectedRow() == -1) {
-            lbltableProjectWarning.setText("Selecione um ou mais projetos associá-lo a este utilizador");
-            b = false;
-        } else {
-            lbltableProjectWarning.setText("");
-        }
-
-        btnAssociateUserToProjects.setEnabled(b);
-    }
+    }//constructor
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -134,25 +145,23 @@ public class AssociateUserToProjects extends javax.swing.JDialog {
 
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tableProjects = new javax.swing.JTable();
-        lbltableProjectWarning = new javax.swing.JLabel();
+        tableTasksAssigned = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tableUsers = new javax.swing.JTable();
-        lbltableUsertWarning = new javax.swing.JLabel();
         btnExit = new javax.swing.JButton();
-        btnAssociateUserToProjects = new javax.swing.JButton();
+        jPanel4 = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tableProjectsAssociated = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Selecionar Projeto (Mantenha Ctrl Premido para Selecionar vários Projetos)"));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Utilizador tem as Tarefas Atribuídas", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Calibri", 0, 18))); // NOI18N
 
-        tableProjects.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        tableProjects.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jScrollPane1.setViewportView(tableProjects);
-
-        lbltableProjectWarning.setText("lbltableProjectWarning");
+        tableTasksAssigned.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        tableTasksAssigned.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane1.setViewportView(tableTasksAssigned);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -160,29 +169,21 @@ public class AssociateUserToProjects extends javax.swing.JDialog {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(lbltableProjectWarning, javax.swing.GroupLayout.PREFERRED_SIZE, 712, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 152, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 838, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lbltableProjectWarning, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Selecionar Utilizador"));
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Selecionar Utilizador", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Calibri", 0, 18))); // NOI18N
 
         tableUsers.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         tableUsers.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane2.setViewportView(tableUsers);
-
-        lbltableUsertWarning.setText("lbltableProjectWarning");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -190,20 +191,14 @@ public class AssociateUserToProjects extends javax.swing.JDialog {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(lbltableUsertWarning, javax.swing.GroupLayout.PREFERRED_SIZE, 712, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane2))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 838, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lbltableUsertWarning, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 22, Short.MAX_VALUE))
         );
 
         btnExit.setBackground(new java.awt.Color(51, 110, 123));
@@ -217,45 +212,60 @@ public class AssociateUserToProjects extends javax.swing.JDialog {
             }
         });
 
-        btnAssociateUserToProjects.setBackground(new java.awt.Color(51, 110, 123));
-        btnAssociateUserToProjects.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
-        btnAssociateUserToProjects.setForeground(new java.awt.Color(255, 255, 255));
-        btnAssociateUserToProjects.setText("Associar Utilizador a Projeto(s)");
-        btnAssociateUserToProjects.setBorder(null);
-        btnAssociateUserToProjects.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAssociateUserToProjectsActionPerformed(evt);
-            }
-        });
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Utilizador está Associados aos projetos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Calibri", 0, 18))); // NOI18N
+
+        tableProjectsAssociated.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        tableProjectsAssociated.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane3.setViewportView(tableProjectsAssociated);
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 838, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnAssociateUserToProjects, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(10, 10, 10)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(19, 19, 19))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(11, 11, 11)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(19, 19, 19)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAssociateUserToProjects, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
@@ -264,32 +274,6 @@ public class AssociateUserToProjects extends javax.swing.JDialog {
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnExitActionPerformed
-
-    private void btnAssociateUserToProjectsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAssociateUserToProjectsActionPerformed
-
-        int UserId = (Integer) tableUsers.getModel().getValueAt(tableUsers.getSelectedRow(), 0);
-        int ProjectId;
-        for (int selectedRow : tableProjects.getSelectedRows()) {
-            ProjectId = (Integer) tableProjects.getModel().getValueAt(selectedRow, 0);
-            if (!s.getRepositoryUserProjectsAssociation().exists(UserId, ProjectId)) {
-                s.getRepositoryUserProjectsAssociation().addUserProjectsAssociation(UserId, ProjectId, s.getCurrentUser().getUserId());
-                //System.out.println("New Association: " +UserId+" " +ProjectId+" " + s.getCurrentUser().getUserId());
-            }
-
-        }
-
-        //Get ProjectId from tableProjects
-        /*int ProjectId = (Integer)tableProjects.getModel().getValueAt(tableProjects.getSelectedRow(), 0);
-        String ProjectTitle = (String)tableProjects.getModel().getValueAt(tableProjects.getSelectedRow(), 1);
-        //System.out.println("ProjectID: " +ProjectId );
-
-        //public void addListaDeTarefa(int ProjectId, String Title, String Description, int CreatedBy ){
-           s.getTaskListsRepository().addTaskList( ProjectId, tbTaskListTitle.getText(),  tbTaskListDescription.getText(),
-                s.getCurrentUser().getUserid());
-            JOptionPane.showMessageDialog(null, "A lista de tarefas " + tbTaskListTitle.getText( )+
-                " foi criada e associada ao projeto " + ProjectTitle + " com sucesso!");*/
-        this.dispose();
-    }//GEN-LAST:event_btnAssociateUserToProjectsActionPerformed
 
     /**
      * @param args the command line arguments
@@ -334,15 +318,15 @@ public class AssociateUserToProjects extends javax.swing.JDialog {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAssociateUserToProjects;
     private javax.swing.JButton btnExit;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JLabel lbltableProjectWarning;
-    private javax.swing.JLabel lbltableUsertWarning;
-    private javax.swing.JTable tableProjects;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTable tableProjectsAssociated;
+    private javax.swing.JTable tableTasksAssigned;
     private javax.swing.JTable tableUsers;
     // End of variables declaration//GEN-END:variables
 }

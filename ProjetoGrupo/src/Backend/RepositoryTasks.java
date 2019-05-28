@@ -1,6 +1,7 @@
 package Backend;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 public class RepositoryTasks {
@@ -36,6 +37,25 @@ public class RepositoryTasks {
         return tasksAssignedToUserId;
     }
 
+    
+    public boolean updateTaskStatusById(int TaskId, TaskStatus newTaskStatus )
+    {
+        for(Task t : Tasks)
+        {
+            if(t.getTaskId()==TaskId)
+            {
+                t.setEstado(newTaskStatus);
+                if(newTaskStatus == TaskStatus.FINISHED)
+                {
+                    t.setEndDate(new Calendar().get);
+                    
+                }
+                return true;
+            }
+        }
+        return false;
+    }
+            
     public void addTask(int CreatedBy, String Title, String Description, TaskPriority pt, TaskStatus et, Date DataDeInicio, int TaskListId, int assignedTo) {
         Task t = new Task(CreatedBy, assignedTo, Title, Description, pt, et, DataDeInicio, getNextTaskid(), TaskListId);
         System.out.println("New Task ID: " + t.getTaskId());

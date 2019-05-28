@@ -15,7 +15,7 @@
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
-    <Property name="title" type="java.lang.String" value="Criar Tarefa"/>
+    <Property name="title" type="java.lang.String" value="Editar Tarefa"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -31,7 +31,7 @@
     <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
     <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
-    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,3,4,0,0,3,-54"/>
+    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,3,36,0,0,3,-52"/>
   </AuxValues>
 
   <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
@@ -50,6 +50,9 @@
           <Color blue="ff" green="ff" red="ff" type="rgb"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Atualizar Tarefa"/>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="null"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCreateTaskActionPerformed"/>
@@ -72,6 +75,9 @@
           <Color blue="ff" green="ff" red="ff" type="rgb"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Cancelar"/>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="null"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCancelActionPerformed"/>
@@ -95,7 +101,7 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="10" y="320" width="370" height="-1"/>
+          <AbsoluteConstraints x="10" y="320" width="370" height="60"/>
         </Constraint>
       </Constraints>
 
@@ -121,7 +127,7 @@
                       <Component id="rbMediumPriority" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="rbHighPriority" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="15" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -255,7 +261,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <Component id="calStartDate" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="0" pref="209" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="211" max="32767" attributes="0"/>
                       </Group>
                       <Component id="lblStartDateWarning" max="32767" attributes="0"/>
                   </Group>
@@ -513,6 +519,7 @@
             <TitledBorder title="Data de Fim"/>
           </Border>
         </Property>
+        <Property name="enabled" type="boolean" value="false"/>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Calibri" size="12" style="0"/>
         </Property>
@@ -532,7 +539,7 @@
                       <Component id="calEndDate" min="-2" max="-2" attributes="0"/>
                       <Component id="lblEndDateWarning" alignment="0" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="221" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -549,6 +556,9 @@
       </Layout>
       <SubComponents>
         <Component class="org.jdesktop.swingx.JXDatePicker" name="calEndDate">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lblEndDateWarning">
           <Properties>
@@ -570,13 +580,14 @@
             <TitledBorder title="Estado"/>
           </Border>
         </Property>
+        <Property name="enabled" type="boolean" value="false"/>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Calibri" size="12" style="0"/>
         </Property>
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="390" y="320" width="370" height="-1"/>
+          <AbsoluteConstraints x="390" y="320" width="370" height="60"/>
         </Constraint>
       </Constraints>
 
@@ -602,7 +613,7 @@
                       <Component id="rbInProgress" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="rbFinished" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="15" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -614,6 +625,7 @@
               <ComponentRef name="btngrpStatus"/>
             </Property>
             <Property name="text" type="java.lang.String" value="N&#xe3;o Iniciada"/>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JRadioButton" name="rbInProgress">
@@ -622,6 +634,7 @@
               <ComponentRef name="btngrpStatus"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Em Progresso"/>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JRadioButton" name="rbFinished">
@@ -630,6 +643,7 @@
               <ComponentRef name="btngrpStatus"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Terminada"/>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
         </Component>
       </SubComponents>

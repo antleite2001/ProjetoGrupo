@@ -216,73 +216,125 @@ public class ChangeProjectData extends javax.swing.JDialog {
         btnExit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Projetos"));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Editar Título", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Calibri", 0, 18))); // NOI18N
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tableProjects.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         tableProjects.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(tableProjects);
 
-        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 16, 740, 150));
+        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 740, 150));
 
+        lbltableProjectWarning.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
+        lbltableProjectWarning.setForeground(new java.awt.Color(255, 0, 0));
         lbltableProjectWarning.setText("lbltableProjectWarning");
-        jPanel2.add(lbltableProjectWarning, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 730, 30));
+        jPanel2.add(lbltableProjectWarning, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 730, 20));
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 780, 210));
-
-        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Editar Título"));
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Editar Título", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Calibri", 0, 18))); // NOI18N
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        tbProjectTitle.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        tbProjectTitle.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
         tbProjectTitle.setPreferredSize(new java.awt.Dimension(30, 20));
-        jPanel4.add(tbProjectTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 574, 30));
+        jPanel4.add(tbProjectTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 740, 30));
 
+        lblTitleWarning.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
+        lblTitleWarning.setForeground(new java.awt.Color(255, 0, 0));
         lblTitleWarning.setText("lblTitleWarning");
-        jPanel4.add(lblTitleWarning, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 63, 588, 39));
+        jPanel4.add(lblTitleWarning, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 63, 588, 20));
 
-        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 620, -1));
-
-        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Editar Descrição"));
+        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Editar Descrição", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Calibri", 0, 18))); // NOI18N
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel5.add(tbProjectDescription, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 16, 574, 30));
 
+        tbProjectDescription.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        tbProjectDescription.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        jPanel5.add(tbProjectDescription, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 740, 30));
+
+        lblDescriptionWarning.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
+        lblDescriptionWarning.setForeground(new java.awt.Color(255, 0, 0));
         lblDescriptionWarning.setText("lblDescriptionWarning");
-        jPanel5.add(lblDescriptionWarning, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 591, 39));
+        jPanel5.add(lblDescriptionWarning, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 63, 570, 20));
 
-        getContentPane().add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 360, -1, 107));
-
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Editar Data de Início"));
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Editar Data de Início", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Calibri", 0, 18))); // NOI18N
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel3.add(calStartDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 27, -1, -1));
+        jPanel3.add(calStartDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 230, -1));
 
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 480, 620, 70));
-
-        jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder("Editar Data de Fim"));
+        jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Editar Data de Fim", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Calibri", 0, 18))); // NOI18N
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel6.add(calEndDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 27, 220, -1));
+        jPanel6.add(calEndDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 220, -1));
 
+        lblEndDateWarning.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
+        lblEndDateWarning.setForeground(new java.awt.Color(255, 0, 0));
         lblEndDateWarning.setText("lblDateWarning");
         lblEndDateWarning.setMinimumSize(new java.awt.Dimension(209, 20));
-        jPanel6.add(lblEndDateWarning, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 574, 35));
+        jPanel6.add(lblEndDateWarning, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 63, 574, 20));
 
-        getContentPane().add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 560, 620, -1));
-
+        btnUpdateProjectData.setBackground(new java.awt.Color(51, 110, 123));
+        btnUpdateProjectData.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        btnUpdateProjectData.setForeground(new java.awt.Color(255, 255, 255));
         btnUpdateProjectData.setText("Atualizar Dados de Projeto");
+        btnUpdateProjectData.setBorder(null);
         btnUpdateProjectData.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnUpdateProjectDataActionPerformed(evt);
             }
         });
-        getContentPane().add(btnUpdateProjectData, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 650, -1, 40));
 
+        btnExit.setBackground(new java.awt.Color(51, 110, 123));
+        btnExit.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        btnExit.setForeground(new java.awt.Color(255, 255, 255));
         btnExit.setText("Sair");
+        btnExit.setBorder(null);
         btnExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnExitActionPerformed(evt);
             }
         });
-        getContentPane().add(btnExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(283, 650, 170, 40));
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 780, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnUpdateProjectData, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addGap(20, 20, 20)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 770, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 770, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 770, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 770, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(15, 15, 15))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnUpdateProjectData, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(48, Short.MAX_VALUE))
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
