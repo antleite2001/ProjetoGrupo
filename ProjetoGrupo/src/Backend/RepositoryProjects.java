@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.JOptionPane;
 
-public class RepositoryProjects {
+public class RepositoryProjects implements java.io.Serializable {
 
-    int nextProjectId = 0;
+ int nextProjectId = 0;
 
     private ArrayList<Project> Projects;
 

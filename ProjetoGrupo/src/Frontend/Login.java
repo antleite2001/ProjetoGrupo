@@ -6,21 +6,22 @@
 package Frontend;
 
 import Backend.*;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
-public class Login extends javax.swing.JDialog {
+public class Login extends javax.swing.JDialog implements Serializable {
 
-     private Sistema s;
+    private Sistema s;
 
-    /**
-     * Creates new form Login2
-     */
     public Login(java.awt.Frame parent, boolean modal, Sistema s) {
         super(parent, modal);
         initComponents();
         this.s = s;
-        s.setCurrentUser(null); 
+        s.setCurrentUser(null);
         this.tbEmail.setText("josealvaro@gmail.com");
         this.tbPassword.setText("123456");
         EnablebtnLogin();
@@ -61,6 +62,23 @@ public class Login extends javax.swing.JDialog {
                 EnablebtnLogin();
             }
         });
+    }
+
+    public boolean guardar(String ficheiroDestino) {
+        boolean retValue = true;
+
+        try {
+            FileOutputStream fileOut = new FileOutputStream(ficheiroDestino);
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+//            out.writeObject(this);
+            out.close();
+            fileOut.close();
+        } catch (IOException i) {
+            retValue = false;
+            //JOptionPane.showMessageDialog(null, i.getMessage(), NOME, JOptionPane.ERROR_MESSAGE);
+        }
+
+        return retValue;
     }
 
     void EnablebtnLogin() {
@@ -116,12 +134,14 @@ public class Login extends javax.swing.JDialog {
         lblPasswordWarning = new javax.swing.JLabel();
         lblLoginDataWarning = new javax.swing.JLabel();
         lblEmailWarning = new javax.swing.JLabel();
+        btnSer = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Login");
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel3.setBackground(new java.awt.Color(51, 110, 123));
 
@@ -178,27 +198,34 @@ public class Login extends javax.swing.JDialog {
                 .addGap(159, 159, 159))
         );
 
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(368, 0, -1, 387));
+
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("Calibri", 0, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(102, 102, 102));
         jLabel1.setText("LOG IN");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(115, 11, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(51, 51, 51));
         jLabel7.setText("Email:");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 67, 300, 22));
 
         tbEmail.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         tbEmail.setForeground(new java.awt.Color(102, 102, 102));
         tbEmail.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
         tbEmail.setCaretColor(new java.awt.Color(102, 102, 102));
+        jPanel1.add(tbEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 89, 300, 40));
 
         jLabel6.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(51, 51, 51));
         jLabel6.setText("Password:");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 177, 300, 22));
 
         tbPassword.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         tbPassword.setForeground(new java.awt.Color(102, 102, 102));
         tbPassword.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
+        jPanel1.add(tbPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 199, 300, 40));
 
         btnLogin.setBackground(new java.awt.Color(51, 110, 123));
         btnLogin.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
@@ -212,6 +239,7 @@ public class Login extends javax.swing.JDialog {
                 btnLoginActionPerformed(evt);
             }
         });
+        jPanel1.add(btnLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 297, 300, 46));
 
         lblRegisterNewAccount.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
         lblRegisterNewAccount.setForeground(new java.awt.Color(102, 102, 102));
@@ -222,81 +250,42 @@ public class Login extends javax.swing.JDialog {
                 lblRegisterNewAccountMouseClicked(evt);
             }
         });
+        jPanel1.add(lblRegisterNewAccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 367, -1, 20));
 
         lbl_email.setFont(new java.awt.Font("Calibri", 0, 10)); // NOI18N
         lbl_email.setForeground(new java.awt.Color(255, 0, 0));
+        jPanel1.add(lbl_email, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 200, -1, -1));
 
         lblPasswordWarning.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
         lblPasswordWarning.setForeground(new java.awt.Color(255, 0, 0));
         lblPasswordWarning.setText("lblPasswordWarning");
+        jPanel1.add(lblPasswordWarning, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 239, 300, 20));
 
         lblLoginDataWarning.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
         lblLoginDataWarning.setForeground(new java.awt.Color(255, 0, 0));
         lblLoginDataWarning.setText("lblLoginDadaWarning");
         lblLoginDataWarning.setToolTipText("");
+        jPanel1.add(lblLoginDataWarning, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 277, 300, 20));
 
         lblEmailWarning.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
         lblEmailWarning.setForeground(new java.awt.Color(255, 0, 0));
         lblEmailWarning.setText("lblEmailWarning");
         lblEmailWarning.setToolTipText("");
+        jPanel1.add(lblEmailWarning, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 129, 300, 20));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(tbPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(8, 8, 8)
-                                .addComponent(lbl_email))
-                            .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(40, 40, 40)
-                                .addComponent(lblRegisterNewAccount))
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tbEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblLoginDataWarning, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblPasswordWarning, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblEmailWarning, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(115, 115, 115)
-                        .addComponent(jLabel1)))
-                .addGap(38, 38, 38)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addGap(12, 12, 12)
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(tbEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(lblEmailWarning, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tbPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(1, 1, 1)
-                        .addComponent(lbl_email)))
-                .addComponent(lblPasswordWarning, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(lblLoginDataWarning, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24)
-                .addComponent(lblRegisterNewAccount, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
+        btnSer.setBackground(new java.awt.Color(51, 110, 123));
+        btnSer.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        btnSer.setForeground(new java.awt.Color(255, 255, 255));
+        btnSer.setText("ser");
+        btnSer.setBorder(null);
+        btnSer.setBorderPainted(false);
+        btnSer.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnSer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSerActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnSer, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 140, 120, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -313,16 +302,18 @@ public class Login extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        s.setCurrentUser(null); 
+        s.setCurrentUser(null);
         for (User user : s.getUsersRepository().getUsers()) {
             if (tbEmail.getText().toUpperCase().equals(user.getEmail().toUpperCase())) {
                 if (tbPassword.getText().equals(user.getUserPassword())) {
-                    s.setCurrentUser(user);  
+                    s.setCurrentUser(user);
+                    tbEmail.setText("");
+                    tbPassword.setText("");
                     this.dispose();
                 }
             }
         }
-        lblLoginDataWarning.setText("Dados de Login Inválidos");       
+        lblLoginDataWarning.setText("Dados de Login Inválidos");
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void lblRegisterNewAccountMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblRegisterNewAccountMouseClicked
@@ -333,6 +324,10 @@ public class Login extends javax.swing.JDialog {
         //this.setVisible(true);
 
     }//GEN-LAST:event_lblRegisterNewAccountMouseClicked
+
+    private void btnSerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSerActionPerformed
+        guardar("c:\\temp\\s.ser");
+    }//GEN-LAST:event_btnSerActionPerformed
 
     /**
      * @param args the command line arguments
@@ -378,6 +373,7 @@ public class Login extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLogin;
+    private javax.swing.JButton btnSer;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

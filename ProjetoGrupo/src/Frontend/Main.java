@@ -1,9 +1,9 @@
 package Frontend;
 
 import Backend.Sistema;
-//import javax.swing.*;
+import java.io.*;
 
-public class Main {
+public class Main  {
 
     public static void main(String args[]) {
         try {
@@ -39,9 +39,13 @@ public class Main {
                 DashBoard dashboard = new DashBoard(null, true, s);
                 dashboard.setLocationRelativeTo(null);
                 dashboard.setVisible(true);
+                
             }
         } while (s.getCurrentUser() != null);
+        
+        
 
     }
+    
 
 }

@@ -27,6 +27,8 @@ public class ChangeTask extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.s = s;
+        Validacoes.FormatCalendar(calStartDate);
+        Validacoes.FormatCalendar(calEndDate);
         lblDescriptionWarning.setText("");
         lblEndDateWarning.setText("");
         lblStartDateWarning.setText("");
@@ -340,7 +342,7 @@ public class ChangeTask extends javax.swing.JDialog {
                 btnCreateTaskActionPerformed(evt);
             }
         });
-        getContentPane().add(btnCreateTask, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 720, 200, 46));
+        getContentPane().add(btnCreateTask, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 730, 200, 46));
 
         btnCancel.setBackground(new java.awt.Color(51, 110, 123));
         btnCancel.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
@@ -352,9 +354,9 @@ public class ChangeTask extends javax.swing.JDialog {
                 btnCancelActionPerformed(evt);
             }
         });
-        getContentPane().add(btnCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 720, 200, 46));
+        getContentPane().add(btnCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 730, 200, 46));
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Prioridade"));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Prioridade", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Calibri", 0, 18))); // NOI18N
         jPanel1.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
 
         btngrpPriority.add(rbLowPriority);
@@ -386,12 +388,12 @@ public class ChangeTask extends javax.swing.JDialog {
                     .addComponent(rbLowPriority)
                     .addComponent(rbMediumPriority)
                     .addComponent(rbHighPriority))
-                .addGap(0, 15, Short.MAX_VALUE))
+                .addGap(0, 16, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, 370, 60));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, 370, 70));
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Atribuir Tarefa ao Utilizador"));
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Atribuir Tarefa ao Utilizador", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Calibri", 0, 18))); // NOI18N
         jPanel3.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
 
         tableUsers.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -418,15 +420,16 @@ public class ChangeTask extends javax.swing.JDialog {
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lbltableUsersWarning, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 500, -1, -1));
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 510, -1, -1));
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Data de Início"));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Data de Início", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Calibri", 0, 18))); // NOI18N
         jPanel2.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
 
         lblStartDateWarning.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
@@ -455,9 +458,9 @@ public class ChangeTask extends javax.swing.JDialog {
                 .addComponent(lblStartDateWarning, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 390, 370, -1));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 410, 370, -1));
 
-        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Descrição"));
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Descrição", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Calibri", 0, 18))); // NOI18N
         jPanel4.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
 
         tbTaskDescription.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
@@ -490,7 +493,7 @@ public class ChangeTask extends javax.swing.JDialog {
 
         getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 200, 370, 100));
 
-        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Título"));
+        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Título", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Calibri", 0, 18))); // NOI18N
         jPanel5.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
 
         tbTaskTitle.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
@@ -524,7 +527,7 @@ public class ChangeTask extends javax.swing.JDialog {
 
         getContentPane().add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 370, 100));
 
-        jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder("Selecionar Tarefa"));
+        jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Selecionar Tarefa", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Calibri", 0, 18))); // NOI18N
         jPanel6.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
 
         tableTasks.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -559,7 +562,7 @@ public class ChangeTask extends javax.swing.JDialog {
 
         getContentPane().add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, -1, -1));
 
-        jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder("Data de Fim"));
+        jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Data de Fim", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Calibri", 0, 18))); // NOI18N
         jPanel7.setEnabled(false);
         jPanel7.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
 
@@ -589,9 +592,9 @@ public class ChangeTask extends javax.swing.JDialog {
                 .addComponent(lblEndDateWarning, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        getContentPane().add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 390, 370, -1));
+        getContentPane().add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 410, 370, -1));
 
-        jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder("Estado"));
+        jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Estado", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Calibri", 0, 18))); // NOI18N
         jPanel8.setEnabled(false);
         jPanel8.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
 
@@ -627,10 +630,10 @@ public class ChangeTask extends javax.swing.JDialog {
                     .addComponent(rbNotStarted)
                     .addComponent(rbInProgress)
                     .addComponent(rbFinished))
-                .addGap(0, 15, Short.MAX_VALUE))
+                .addGap(0, 16, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 320, 370, 60));
+        getContentPane().add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 320, 370, 70));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

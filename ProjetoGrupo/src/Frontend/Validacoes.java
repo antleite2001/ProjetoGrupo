@@ -8,8 +8,11 @@ import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JDialog;
+import org.jdesktop.swingx.JXDatePicker;
 
 public class Validacoes {
+ 
+    static DateFormat dateFormat = new SimpleDateFormat("E dd/MM/yyyy");
 
     public static boolean validaEmail(String email) {
 
@@ -18,24 +21,25 @@ public class Validacoes {
 
         return matcher.matches();
     }
-    
-    static DateFormat dateFormat = new SimpleDateFormat("E dd/MM/yyyy");
+
+   
+    public static void FormatCalendar(JXDatePicker cal) {
+        cal.getEditor().setEditable(false);
+        cal.setFormats(new String[]{"E dd/MM/yyyy"});
+    }
 
     public static String FormatDate(Date date) {
         return dateFormat.format(date);
     }
 
-    
-    public static void SetDialogProperties(JDialog dialog, Sistema s, int width, int height, String menuText)
-    {        
-        dialog.setSize(new Dimension(width, height)); 
-        dialog.setResizable(false);   
-        dialog.setTitle(menuText +  " - "+ s.getCurrentUser().getUserName() + " (" + s.getCurrentUser().getEmail() + ")");
+    public static void SetDialogProperties(JDialog dialog, Sistema s, int width, int height, String menuText) {
+        dialog.setSize(new Dimension(width, height));
+        dialog.setResizable(false);
+        dialog.setTitle(menuText + " - " + s.getCurrentUser().getUserName() + " (" + s.getCurrentUser().getEmail() + ")");
 
     }
-    
-    public static void print(Object s)
-    {
+
+    public static void print(Object s) {
         System.out.println(s);
     }
 }

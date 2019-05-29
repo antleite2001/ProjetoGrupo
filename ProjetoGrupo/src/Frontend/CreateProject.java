@@ -22,7 +22,8 @@ public class CreateProject extends javax.swing.JDialog {
         initComponents();
         this.s = s;
         Validacoes.SetDialogProperties(this, s, 660, 660, "Criar Projeto");
-
+        Validacoes.FormatCalendar(calStartDate);
+        Validacoes.FormatCalendar(calEndDate);
         EnablebtnCreateproject();
 
         txtProjectDescription.getDocument().addDocumentListener(new DocumentListener() {

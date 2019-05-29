@@ -28,7 +28,8 @@ public class ChangeProjectData extends javax.swing.JDialog {
         initComponents();
         this.s = s;
         this.setTitle("Alterar dados de Projeto - " + s.getCurrentUser().getUserName() + " (" + s.getCurrentUser().getEmail() + ")");
-
+        Validacoes.FormatCalendar(calStartDate);
+        Validacoes.FormatCalendar(calEndDate);
 //set jtable selection to single row
         tableProjects.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 

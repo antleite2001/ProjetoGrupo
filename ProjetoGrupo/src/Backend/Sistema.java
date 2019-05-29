@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.text.ParseException;
 
-public class Sistema {
+public class Sistema  {
 
     private RepositoryProjects repositoryProjects;
     private RepositoryUsers reporitoryUsers;
@@ -71,7 +71,15 @@ public class Sistema {
 
         //Tasks CreatedBy,   Title,   Description,   priority, Status, 
         //  DataDeInicio,   TaskListId,   assignedTo
-        repositoryTasks.addTask(JoseAlvaro, "Task1", "Task1 description", TaskPriority.LOW, TaskStatus.NOTSTARTED, new Date(System.currentTimeMillis()), tasklist1, JoseAlvaro);
+        try {
+            repositoryTasks.addTask(JoseAlvaro, "Task1", "Task1 description", TaskPriority.LOW, TaskStatus.FINISHED,
+                    formatter.parse("1-May-2019"), tasklist1, JoseAlvaro);
+            repositoryTasks.getTasks().get(0).setEndDate(formatter.parse("20-May-2019"));
+        } catch (ParseException e) {
+            e.printStackTrace();
+            System.out.println("SISTEMA-ERROR:" + e.getMessage());
+        }
+
         repositoryTasks.addTask(JoseAlvaro, "Task2", "Task2 description", TaskPriority.MEDIUM, TaskStatus.NOTSTARTED, new Date(System.currentTimeMillis()), tasklist1, JoseAlvaro);
         repositoryTasks.addTask(JoseAlvaro, "Task3", "Task3 description", TaskPriority.HIGH, TaskStatus.NOTSTARTED, new Date(System.currentTimeMillis()), tasklist1, JoseAlvaro);
         repositoryTasks.addTask(JoseAlvaro, "Task4", "Task4 description", TaskPriority.HIGH, TaskStatus.NOTSTARTED, new Date(System.currentTimeMillis()), tasklist1, JoseAlvaro);
@@ -81,8 +89,16 @@ public class Sistema {
         repositoryTasks.addTask(JoseAlvaro, "Task8", "Task8 description", TaskPriority.HIGH, TaskStatus.NOTSTARTED, new Date(System.currentTimeMillis()), tasklist1, AntonioSilva);
         repositoryTasks.addTask(JoseAlvaro, "Task9", "Task9 description", TaskPriority.HIGH, TaskStatus.NOTSTARTED, new Date(System.currentTimeMillis()), tasklist1, InesSilva);
         repositoryTasks.addTask(JoseAlvaro, "Task10", "Task10 description", TaskPriority.HIGH, TaskStatus.NOTSTARTED, new Date(System.currentTimeMillis()), tasklist1, PedroSilva);
- //11
-        repositoryTasks.addTask(ManuelSilva, "Task11", "Task11 description", TaskPriority.LOW, TaskStatus.NOTSTARTED, new Date(System.currentTimeMillis()), tasklist2, JoseAlvaro);
+        
+        try {
+        repositoryTasks.addTask(ManuelSilva, "Task11", "Task11 description", TaskPriority.LOW, TaskStatus.FINISHED, formatter.parse("1-May-2019"), tasklist2, JoseAlvaro);
+        repositoryTasks.getTasks().get(10).setEndDate(formatter.parse("21-May-2019"));
+        } catch (ParseException e) {
+            e.printStackTrace();
+            System.out.println("SISTEMA-ERROR:" + e.getMessage());
+        }
+        
+        
         repositoryTasks.addTask(ManuelSilva, "Task12", "Task12 description", TaskPriority.MEDIUM, TaskStatus.NOTSTARTED, new Date(System.currentTimeMillis()), tasklist2, JoseAlvaro);
         repositoryTasks.addTask(ManuelSilva, "Task13", "Task13 description", TaskPriority.HIGH, TaskStatus.NOTSTARTED, new Date(System.currentTimeMillis()), tasklist2, ManuelSilva);
         repositoryTasks.addTask(ManuelSilva, "Task14", "Task14 description", TaskPriority.HIGH, TaskStatus.NOTSTARTED, new Date(System.currentTimeMillis()), tasklist2, ManuelSilva);
@@ -92,13 +108,13 @@ public class Sistema {
         repositoryTasks.addTask(ManuelSilva, "Task18", "Task18 description", TaskPriority.HIGH, TaskStatus.NOTSTARTED, new Date(System.currentTimeMillis()), tasklist2, InesSilva);
         repositoryTasks.addTask(ManuelSilva, "Task19", "Task19 description", TaskPriority.HIGH, TaskStatus.NOTSTARTED, new Date(System.currentTimeMillis()), tasklist2, InesSilva);
         repositoryTasks.addTask(ManuelSilva, "Task20", "Task20 description", TaskPriority.HIGH, TaskStatus.NOTSTARTED, new Date(System.currentTimeMillis()), tasklist2, InesSilva);
- //21
+        //21
         repositoryTasks.addTask(JoseAlvaro, "Task21", "Task21 description", TaskPriority.LOW, TaskStatus.NOTSTARTED, new Date(System.currentTimeMillis()), tasklist3, JoseAlvaro);
         repositoryTasks.addTask(JoseAlvaro, "Task22", "Task22 description", TaskPriority.MEDIUM, TaskStatus.NOTSTARTED, new Date(System.currentTimeMillis()), tasklist3, InesSilva);
         repositoryTasks.addTask(JoseAlvaro, "Task23", "Task23 description", TaskPriority.HIGH, TaskStatus.NOTSTARTED, new Date(System.currentTimeMillis()), tasklist3, InesSilva);
         repositoryTasks.addTask(JoseAlvaro, "Task24", "Task24 description", TaskPriority.HIGH, TaskStatus.NOTSTARTED, new Date(System.currentTimeMillis()), tasklist3, AntonioSilva);
         repositoryTasks.addTask(JoseAlvaro, "Task25", "Task25 description", TaskPriority.LOW, TaskStatus.NOTSTARTED, new Date(System.currentTimeMillis()), tasklist3, PedroSilva);
-        
+
         repositoryTasks.addTask(ManuelSilva, "Task26", "Task26 description", TaskPriority.MEDIUM, TaskStatus.NOTSTARTED, new Date(System.currentTimeMillis()), tasklist4, JoseAlvaro);
         repositoryTasks.addTask(ManuelSilva, "Task27", "Task27 description", TaskPriority.HIGH, TaskStatus.NOTSTARTED, new Date(System.currentTimeMillis()), tasklist4, ManuelSilva);
         repositoryTasks.addTask(ManuelSilva, "Task28", "Task28 description", TaskPriority.HIGH, TaskStatus.NOTSTARTED, new Date(System.currentTimeMillis()), tasklist4, InesSilva);

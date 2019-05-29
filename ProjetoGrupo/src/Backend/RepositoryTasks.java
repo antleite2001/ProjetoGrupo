@@ -1,8 +1,10 @@
 package Backend;
 
+import Frontend.Validacoes;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import org.jdesktop.swingx.JXDatePicker;
 
 public class RepositoryTasks {
 
@@ -37,25 +39,64 @@ public class RepositoryTasks {
         return tasksAssignedToUserId;
     }
 
-    
-    public boolean updateTaskStatusById(int TaskId, TaskStatus newTaskStatus )
-    {
-        for(Task t : Tasks)
-        {
-            if(t.getTaskId()==TaskId)
-            {
+    public ArrayList<Task> getTasksCreatedBy(int CreatedBy) {
+        ArrayList<Task> tasksCreatedBy = new ArrayList<>();
+        for (Task t : Tasks) {
+            if (t.getCreatedBy() == CreatedBy) {
+                tasksCreatedBy.add(t);
+            }
+        }
+        return tasksCreatedBy;
+    }
+
+    public ArrayList<Task> getTasksByPriority(TaskPriority taskPriority) {
+        ArrayList<Task> tasksPriority = new ArrayList<>();
+        for (Task t : Tasks) {
+            if (t.getTaskPriority() == taskPriority) {
+                tasksPriority.add(t);
+            }
+        }
+        return tasksPriority;
+    }
+
+    public ArrayList<Task> getTasksByStatus(TaskStatus taskStatus) {
+        ArrayList<Task> tasksStatus = new ArrayList<>();
+        for (Task t : Tasks) {
+            if (t.getTaskStatus() == taskStatus) {
+                tasksStatus.add(t);
+            }
+        }
+        return tasksStatus;
+    }
+
+    public ArrayList<Task> getTasksByEndDate(JXDatePicker endDate) {
+        String selectedEndDateDays = Validacoes.FormatDate(endDate.getDate());
+        ArrayList<Task> tasksEndDate = new ArrayList<>();
+        for (Task t : Tasks) {
+            if (t.getEndDate() != null) {
+                if (selectedEndDateDays.equals(Validacoes.FormatDate(t.getEndDate()))) {
+                    tasksEndDate.add(t);
+                }
+            }
+        }
+        return tasksEndDate;
+    }
+
+    public boolean updateTaskStatusById(int TaskId, TaskStatus newTaskStatus) {
+        for (Task t : Tasks) {
+            if (t.getTaskId() == TaskId) {
                 t.setEstado(newTaskStatus);
-                 
+
                 return true;
             }
         }
         return false;
     }
-            
-    public void addTask(int CreatedBy, String Title, String Description, TaskPriority pt, TaskStatus et, Date DataDeInicio, int TaskListId, int assignedTo) {
+
+    public int addTask(int CreatedBy, String Title, String Description, TaskPriority pt, TaskStatus et, Date DataDeInicio, int TaskListId, int assignedTo) {
         Task t = new Task(CreatedBy, assignedTo, Title, Description, pt, et, DataDeInicio, getNextTaskid(), TaskListId);
-        System.out.println("New Task ID: " + t.getTaskId());
         Tasks.add(t);
+        return t.getTaskId();
     }
 
     public int getNextTaskid() {
@@ -65,22 +106,16 @@ public class RepositoryTasks {
     public void removeTask(Task tarefa) {
         Tasks.remove(tarefa);
     }
-    
-    public void updateTaskStatusByIdandDate
-    (int TaskId, TaskStatus newTaskStatus, Date d)
-    {
-        for(Task t : Tasks)
-        {
-            if(t.getTaskId()==TaskId)
-            {
+
+    public void updateTaskStatusByIdandDate(int TaskId, TaskStatus newTaskStatus, Date d) {
+        for (Task t : Tasks) {
+            if (t.getTaskId() == TaskId) {
                 t.setEstado(newTaskStatus);
                 t.setEndDate(d);
-                
+
             }
         }
     }
-    
-
 
     @Override
     public String toString() {

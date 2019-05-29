@@ -7,12 +7,9 @@ package Backend;
 
 import java.util.ArrayList;
 
-/**
- *
- * @author VarianInstaller
- */
+
 public class RepositoryUserProjectsAssociation {
-     int nextUserProjectsAssociation = 0;
+   int  nextUserProjectsAssociation = 0;
 
     
     
