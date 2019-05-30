@@ -1,10 +1,11 @@
 package Backend;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.text.ParseException;
-
-public class Sistema  {
+ 
+public class Sistema  implements Serializable{
 
     private RepositoryProjects repositoryProjects;
     private RepositoryUsers reporitoryUsers;
@@ -22,13 +23,15 @@ public class Sistema  {
         this.repositoryTasks = new RepositoryTasks();
         this.RepositoryUserProjectsAssociation = new RepositoryUserProjectsAssociation();
 
+        /*
+        //Repository Users
         int JoseAlvaro = this.reporitoryUsers.addUser("JoseAlvaro", "JoseAlvaro@gmail.com", "123456");
         int AntonioSilva = this.reporitoryUsers.addUser("AntonioSilva", "AntonioSilva@gmail.com", "123456");
         int ManuelSilva = this.reporitoryUsers.addUser("ManuelSilva", "ManuelSilva@gmail.com", "123456");
         int InesSilva = this.reporitoryUsers.addUser("InesSilva", "InesSilva@gmail.com", "123456");
         int PedroSilva = this.reporitoryUsers.addUser("PedroSilva", "PedroSilva@gmail.com", "123456");
 
-//Projects Repository
+        //Projects Repository
         int p1JoseAlvaro = 1;
         int p2ManuelSilva = 1;
         int p3JoseAlvaro = 1;
@@ -123,7 +126,7 @@ public class Sistema  {
 
         repositoryTasks.addTask(JoseAlvaro, "Task31", "Task31 description", TaskPriority.HIGH, TaskStatus.NOTSTARTED, new Date(System.currentTimeMillis()), tasklist5, JoseAlvaro);
         repositoryTasks.addTask(JoseAlvaro, "Task32", "Task32 description", TaskPriority.HIGH, TaskStatus.NOTSTARTED, new Date(System.currentTimeMillis()), tasklist5, PedroSilva);
-
+*/
     }
 
     public RepositoryTasks getRepositoryTasks() {

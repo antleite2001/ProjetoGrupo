@@ -5,13 +5,14 @@
  */
 package Backend;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  *
  * @author VarianInstaller
  */
-public class RepositoryTaskLists {
+public class RepositoryTaskLists implements Serializable{
     int nextTaskListid = 0;  
     private ArrayList<TaskList> ListaDeTarefas;
     
@@ -46,7 +47,7 @@ public class RepositoryTaskLists {
         }
     }
 
-    public TaskList getTaskListByTaskId(int TaskListId)
+    public TaskList getTaskListByTaskListId(int TaskListId)
    {
     for(TaskList tl:ListaDeTarefas)  
     {

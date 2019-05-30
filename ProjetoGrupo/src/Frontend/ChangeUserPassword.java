@@ -147,10 +147,12 @@ public class ChangeUserPassword extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Registo");
         setResizable(false);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel4.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(51, 51, 51));
         jLabel4.setText("Nova Password:");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 126, 300, 22));
 
         tbPassword.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         tbPassword.setForeground(new java.awt.Color(102, 102, 102));
@@ -160,14 +162,17 @@ public class ChangeUserPassword extends javax.swing.JDialog {
                 tbPasswordActionPerformed(evt);
             }
         });
+        getContentPane().add(tbPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 148, 412, 40));
 
         lblInsertPasswordWarning.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
         lblInsertPasswordWarning.setForeground(new java.awt.Color(255, 0, 0));
         lblInsertPasswordWarning.setText("lblInsertPasswordWarning");
+        getContentPane().add(lblInsertPasswordWarning, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 188, 300, 20));
 
         jLabel5.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(51, 51, 51));
         jLabel5.setText("Confirmar Password:");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 241, 300, 22));
 
         tbConfirmPassword.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         tbConfirmPassword.setForeground(new java.awt.Color(102, 102, 102));
@@ -177,10 +182,12 @@ public class ChangeUserPassword extends javax.swing.JDialog {
                 tbConfirmPasswordActionPerformed(evt);
             }
         });
+        getContentPane().add(tbConfirmPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 263, 412, 40));
 
         lblInsertPasswordConfirmationWarning.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
         lblInsertPasswordConfirmationWarning.setForeground(new java.awt.Color(255, 0, 0));
         lblInsertPasswordConfirmationWarning.setText("lblInsertPasswordConfirmationWarning");
+        getContentPane().add(lblInsertPasswordConfirmationWarning, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 303, 300, 20));
 
         btnChangeUserPassword.setBackground(new java.awt.Color(51, 110, 123));
         btnChangeUserPassword.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
@@ -192,6 +199,7 @@ public class ChangeUserPassword extends javax.swing.JDialog {
                 btnChangeUserPasswordActionPerformed(evt);
             }
         });
+        getContentPane().add(btnChangeUserPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 334, 200, 46));
 
         btnExit.setBackground(new java.awt.Color(51, 110, 123));
         btnExit.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
@@ -203,10 +211,12 @@ public class ChangeUserPassword extends javax.swing.JDialog {
                 btnExitActionPerformed(evt);
             }
         });
+        getContentPane().add(btnExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(232, 334, 200, 46));
 
         jLabel6.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(51, 51, 51));
         jLabel6.setText("Password Atual:");
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 11, 300, 22));
 
         tbCurrentPassword.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         tbCurrentPassword.setForeground(new java.awt.Color(102, 102, 102));
@@ -216,61 +226,12 @@ public class ChangeUserPassword extends javax.swing.JDialog {
                 tbCurrentPasswordActionPerformed(evt);
             }
         });
+        getContentPane().add(tbCurrentPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 33, 412, 40));
 
         lblCurrentPasswordWarning.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
         lblCurrentPasswordWarning.setForeground(new java.awt.Color(255, 0, 0));
         lblCurrentPasswordWarning.setText("lblCurrentPasswordWarning");
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tbPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblInsertPasswordConfirmationWarning, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblInsertPasswordWarning, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnChangeUserPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(tbConfirmPassword, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tbCurrentPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblCurrentPasswordWarning, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(20, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(tbCurrentPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(lblCurrentPasswordWarning, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(tbPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(lblInsertPasswordWarning, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(tbConfirmPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(lblInsertPasswordConfirmationWarning, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnChangeUserPassword)
-                    .addComponent(btnExit))
-                .addContainerGap(25, Short.MAX_VALUE))
-        );
+        getContentPane().add(lblCurrentPasswordWarning, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 73, 300, 20));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

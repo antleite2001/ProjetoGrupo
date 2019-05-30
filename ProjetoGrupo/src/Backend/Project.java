@@ -1,31 +1,28 @@
 package Backend;
 
-import java.util.Calendar;
+import java.io.Serializable;
 import java.util.Date;
 
-public class Project 
-{
+
+//OK
+public class Project implements Serializable {
     private int ProjetoID;
     private int ProjectOwner;
-    private String ProjectTitle, ProjectDescription;
-
-    
+    private String ProjectTitle, ProjectDescription;    
     private Date StartDate, EndDate;
     private ProjectStatus enumprojeto; 
     
     
    //construtor
-    public Project (int owner, String titulo, String descricao, Date dataInicio, Date dataFim, int projetoID){
+    public Project (int owner, String titulo, String descricao, Date dataInicio, Date dataFim, int projetoID) {
        
        this.ProjectOwner = owner;
        this.ProjectTitle = titulo;
        this.ProjectDescription = descricao;
        this.StartDate = dataInicio;
-       this.EndDate = dataFim;
-     
+       this.EndDate = dataFim;     
        this.enumprojeto = ProjectStatus.NOTSTARTED;
        this.ProjetoID = projetoID;
-       //System.out.println("Project StartDate " + this.StartDate + "  EndDate " +dataFim);
     }
 
     public int getProjectId() {

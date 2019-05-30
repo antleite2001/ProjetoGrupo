@@ -5,10 +5,11 @@
  */
 package Backend;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
-public class RepositoryUserProjectsAssociation {
+public class RepositoryUserProjectsAssociation implements Serializable{
    int  nextUserProjectsAssociation = 0;
 
     

@@ -21,7 +21,7 @@ public class FilterByTaskStatus extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.s = s;
-        Validacoes.SetDialogProperties(this, s, 900, 800, "Filtrar por Estado");
+        Validacoes.SetDialogProperties(this, s, "Filtrar por Estado");
 
         //Tasks Assigned ------------------------------------------------------
         //set jtable selection to single row
@@ -122,6 +122,7 @@ public class FilterByTaskStatus extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tarefas Selecionadas por Estado", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Calibri", 0, 18))); // NOI18N
 
@@ -145,6 +146,8 @@ public class FilterByTaskStatus extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 108, -1, -1));
+
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Selecionar Estado", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Calibri", 0, 18))); // NOI18N
 
         cbTaskStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Não Iniciada", "Em Andamento", "Terminada" }));
@@ -166,6 +169,8 @@ public class FilterByTaskStatus extends javax.swing.JDialog {
                 .addContainerGap(24, Short.MAX_VALUE))
         );
 
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, -1, -1));
+
         btnExit.setBackground(new java.awt.Color(51, 110, 123));
         btnExit.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         btnExit.setForeground(new java.awt.Color(255, 255, 255));
@@ -176,32 +181,7 @@ public class FilterByTaskStatus extends javax.swing.JDialog {
                 btnExitActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(19, 19, 19))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
+        getContentPane().add(btnExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(671, 552, 200, 46));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

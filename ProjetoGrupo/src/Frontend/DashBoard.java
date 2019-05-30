@@ -26,7 +26,7 @@ public class DashBoard extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.s = s;
-        Validacoes.SetDialogProperties(this, s, 1200, 500,"DashBoard" );
+        Validacoes.SetDialogProperties(this, s, "DashBoard" );
         
          //-------Tasks table----------------------------------------------------
         //set jtable selection to single row
@@ -100,22 +100,21 @@ public class DashBoard extends javax.swing.JDialog {
         menuChangeUserName = new javax.swing.JMenuItem();
         menuChangeEmail = new javax.swing.JMenuItem();
         menuChangePassword = new javax.swing.JMenuItem();
-        menuAssignUsertoTask = new javax.swing.JMenuItem();
         menuAssociateUserToProject = new javax.swing.JMenuItem();
-        menuDisplayUserRelationships = new javax.swing.JMenuItem();
         menuDisplayAllUsers = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         menuCreateProject = new javax.swing.JMenuItem();
         menuDisplayprojects = new javax.swing.JMenuItem();
+        menuDisplayUserRelationships = new javax.swing.JMenuItem();
         menuChangeProjectData = new javax.swing.JMenuItem();
         menuAssociateProjectsToUser = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         menuCreateTaskList = new javax.swing.JMenuItem();
         menuDisplayTaskList = new javax.swing.JMenuItem();
         menuEditTaskList = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         menuCreateTasks = new javax.swing.JMenuItem();
+        menuDisplayTasks = new javax.swing.JMenuItem();
         menuEditTasks = new javax.swing.JMenuItem();
         menuChangeTaskStatus = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
@@ -124,7 +123,6 @@ public class DashBoard extends javax.swing.JDialog {
         menuFilterByPriority = new javax.swing.JMenuItem();
         menuFilterByStatus = new javax.swing.JMenuItem();
         menuFilterByEndDate = new javax.swing.JMenuItem();
-        menuDisplayDelayedTasks = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -145,7 +143,7 @@ public class DashBoard extends javax.swing.JDialog {
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 909, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 898, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel6Layout.setVerticalGroup(
@@ -156,7 +154,7 @@ public class DashBoard extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        getContentPane().add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, -1, 350));
+        getContentPane().add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, -1, -1));
 
         jMenuBar1.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
 
@@ -206,14 +204,6 @@ public class DashBoard extends javax.swing.JDialog {
         });
         jMenu2.add(menuChangePassword);
 
-        menuAssignUsertoTask.setText("Associar Utilizador a Tarefas");
-        menuAssignUsertoTask.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuAssignUsertoTaskActionPerformed(evt);
-            }
-        });
-        jMenu2.add(menuAssignUsertoTask);
-
         menuAssociateUserToProject.setText("Associar Utilizador a Projetos");
         menuAssociateUserToProject.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -221,14 +211,6 @@ public class DashBoard extends javax.swing.JDialog {
             }
         });
         jMenu2.add(menuAssociateUserToProject);
-
-        menuDisplayUserRelationships.setText("Ver Relacionamentos");
-        menuDisplayUserRelationships.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuDisplayUserRelationshipsActionPerformed(evt);
-            }
-        });
-        jMenu2.add(menuDisplayUserRelationships);
 
         menuDisplayAllUsers.setText("Listar Todos");
         menuDisplayAllUsers.addActionListener(new java.awt.event.ActionListener() {
@@ -258,6 +240,14 @@ public class DashBoard extends javax.swing.JDialog {
         });
         jMenu3.add(menuDisplayprojects);
 
+        menuDisplayUserRelationships.setText("Mostrar Tarefas Atribuídas");
+        menuDisplayUserRelationships.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuDisplayUserRelationshipsActionPerformed(evt);
+            }
+        });
+        jMenu3.add(menuDisplayUserRelationships);
+
         menuChangeProjectData.setText("Editar Dados de Projeto");
         menuChangeProjectData.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -273,14 +263,6 @@ public class DashBoard extends javax.swing.JDialog {
             }
         });
         jMenu3.add(menuAssociateProjectsToUser);
-
-        jMenuItem1.setText("Listar");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
-            }
-        });
-        jMenu3.add(jMenuItem1);
 
         jMenuBar1.add(jMenu3);
 
@@ -321,6 +303,14 @@ public class DashBoard extends javax.swing.JDialog {
             }
         });
         jMenu5.add(menuCreateTasks);
+
+        menuDisplayTasks.setText("Mostrar Tarefas");
+        menuDisplayTasks.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuDisplayTasksActionPerformed(evt);
+            }
+        });
+        jMenu5.add(menuDisplayTasks);
 
         menuEditTasks.setText("Editar Tarefas");
         menuEditTasks.addActionListener(new java.awt.event.ActionListener() {
@@ -382,14 +372,6 @@ public class DashBoard extends javax.swing.JDialog {
 
         jMenu5.add(jMenu6);
 
-        menuDisplayDelayedTasks.setText("Mostrar Tarefas Atrasadas");
-        menuDisplayDelayedTasks.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuDisplayDelayedTasksActionPerformed(evt);
-            }
-        });
-        jMenu5.add(menuDisplayDelayedTasks);
-
         jMenuBar1.add(jMenu5);
 
         setJMenuBar(jMenuBar1);
@@ -434,14 +416,10 @@ public class DashBoard extends javax.swing.JDialog {
         signUpUser.setVisible(true);
     }//GEN-LAST:event_menuSignUpUserActionPerformed
 
-    private void menuAssignUsertoTaskActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAssignUsertoTaskActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_menuAssignUsertoTaskActionPerformed
-
     private void menuDisplayUserRelationshipsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuDisplayUserRelationshipsActionPerformed
-        DisplayUserRelationship displayUserRelationship = new DisplayUserRelationship(null, true, s);
-        displayUserRelationship.setLocationRelativeTo(null);
-        displayUserRelationship.setVisible(true);
+        DisplayTasksAssignedToUsers displayTasksAssignedToUsers = new DisplayTasksAssignedToUsers(null, true, s);
+        displayTasksAssignedToUsers.setLocationRelativeTo(null);
+        displayTasksAssignedToUsers.setVisible(true);
     }//GEN-LAST:event_menuDisplayUserRelationshipsActionPerformed
 
     private void menuAssociateUserToProjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAssociateUserToProjectActionPerformed
@@ -455,12 +433,6 @@ public class DashBoard extends javax.swing.JDialog {
         ct.setLocationRelativeTo(null);
         ct.setVisible(true);
     }//GEN-LAST:event_menuCreateTasksActionPerformed
-
-    private void menuDisplayDelayedTasksActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuDisplayDelayedTasksActionPerformed
-//        DisplayDelayedTasks displayDelayedTasks = new DisplayDelayedTasks(null, true, s);
-//        displayDelayedTasks.setLocationRelativeTo(null);
-//        displayDelayedTasks.setVisible(true);
-    }//GEN-LAST:event_menuDisplayDelayedTasksActionPerformed
 
     private void menuEditTasksActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuEditTasksActionPerformed
         ChangeTask changeTask = new ChangeTask(null, true, s);
@@ -481,7 +453,7 @@ public class DashBoard extends javax.swing.JDialog {
     }//GEN-LAST:event_menuDisplayprojectsActionPerformed
 
     private void menuChangeProjectDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuChangeProjectDataActionPerformed
-        ChangeProjectData changeProjectData = new ChangeProjectData(null, true, s);
+        ChangeProject changeProjectData = new ChangeProject(null, true, s);
         changeProjectData.setLocationRelativeTo(null);
         changeProjectData.setVisible(true);
     }//GEN-LAST:event_menuChangeProjectDataActionPerformed
@@ -521,10 +493,6 @@ public class DashBoard extends javax.swing.JDialog {
         displayDelayedTasks();
     }//GEN-LAST:event_menuChangeTaskStatusActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
-
     private void menuFilterByCreatedByActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuFilterByCreatedByActionPerformed
         FilterByTaskCreatedBy filterByTaskCreatedBy = new FilterByTaskCreatedBy(null, true, s);
         filterByTaskCreatedBy.setLocationRelativeTo(null);
@@ -556,6 +524,12 @@ public class DashBoard extends javax.swing.JDialog {
         filterByTaskEndDate.setVisible(true);
     }//GEN-LAST:event_menuFilterByEndDateActionPerformed
 
+    private void menuDisplayTasksActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuDisplayTasksActionPerformed
+        DisplayTasks displayTasks = new DisplayTasks(null, true, s);
+        displayTasks.setLocationRelativeTo(null);
+        displayTasks.setVisible(true);
+    }//GEN-LAST:event_menuDisplayTasksActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -568,10 +542,8 @@ public class DashBoard extends javax.swing.JDialog {
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JMenuItem menuAssignUsertoTask;
     private javax.swing.JMenuItem menuAssociateProjectsToUser;
     private javax.swing.JMenuItem menuAssociateUserToProject;
     private javax.swing.JMenuItem menuChangeEmail;
@@ -583,8 +555,8 @@ public class DashBoard extends javax.swing.JDialog {
     private javax.swing.JMenuItem menuCreateTaskList;
     private javax.swing.JMenuItem menuCreateTasks;
     private javax.swing.JMenuItem menuDisplayAllUsers;
-    private javax.swing.JMenuItem menuDisplayDelayedTasks;
     private javax.swing.JMenuItem menuDisplayTaskList;
+    private javax.swing.JMenuItem menuDisplayTasks;
     private javax.swing.JMenuItem menuDisplayUserRelationships;
     private javax.swing.JMenuItem menuDisplayprojects;
     private javax.swing.JMenuItem menuEditTaskList;

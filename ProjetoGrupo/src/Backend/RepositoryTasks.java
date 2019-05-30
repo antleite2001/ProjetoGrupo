@@ -1,12 +1,13 @@
 package Backend;
 
 import Frontend.Validacoes;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import org.jdesktop.swingx.JXDatePicker;
 
-public class RepositoryTasks {
+public class RepositoryTasks implements Serializable {
 
     int nextTaskid = 0;
     private ArrayList<Task> Tasks;
@@ -29,6 +30,9 @@ public class RepositoryTasks {
         return null;
     }
 
+    
+     
+    
     public ArrayList<Task> getTasksAssignedToUser(int AssignedTo) {
         ArrayList<Task> tasksAssignedToUserId = new ArrayList<>();
         for (Task t : Tasks) {

@@ -21,7 +21,7 @@ public class CreateProject extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.s = s;
-        Validacoes.SetDialogProperties(this, s, 660, 660, "Criar Projeto");
+        Validacoes.SetDialogProperties(this, s,  "Criar Projeto");
         Validacoes.FormatCalendar(calStartDate);
         Validacoes.FormatCalendar(calEndDate);
         EnablebtnCreateproject();
@@ -105,8 +105,9 @@ public class CreateProject extends javax.swing.JDialog {
         long currentdate = System.currentTimeMillis() / (1000 * 60 * 60 * 24);
 
         if (startdate < currentdate) {
-            b = false;
-            lblStartDateWarning.setText("Data de início do projeto deve ser igual ou superior à data atual");
+            //b = false;
+            //lblStartDateWarning.setText("Data de início do projeto deve ser igual ou superior à data atual");
+            lblStartDateWarning.setText("");
         } else {
             lblStartDateWarning.setText("");
         }

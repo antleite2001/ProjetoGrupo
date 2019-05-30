@@ -5,7 +5,9 @@
  */
 package Frontend;
 
-public class ser{
+import java.io.Serializable;
+
+public class ser implements Serializable{
     int a=0;
     int b=1;
     public ser(int a, int b)

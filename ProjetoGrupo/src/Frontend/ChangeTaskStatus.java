@@ -1,13 +1,12 @@
-
 package Frontend;
 
 import Backend.*;
+import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
- 
 public class ChangeTaskStatus extends javax.swing.JDialog {
 
     Sistema s;
@@ -21,7 +20,7 @@ public class ChangeTaskStatus extends javax.swing.JDialog {
         initComponents();
         this.s = s;
 
-        Validacoes.SetDialogProperties(this, s, 1000, 715, "Atualizar Estado da Tarefa");
+        Validacoes.SetDialogProperties(this, s, "Atualizar Estado da Tarefa");
 
         rbNotStarted.setSelected(false);
         rbInProgress.setSelected(false);
@@ -48,25 +47,30 @@ public class ChangeTaskStatus extends javax.swing.JDialog {
         //----------------------------------------------------------------------
 
         //fill tasks table
-        for (Task t : s.getRepositoryTasks().getTasksAssignedToUser(s.getCurrentUser().getUserId())) {
-            if (t.getEndDate() == null) {
-                modelTask.addRow(new Object[]{
-                    t.getTaskId(),
-                    t.getTitle(),
-                    t.getDescription(),
-                    Validacoes.FormatDate(t.getStartDate()),
-                    "", 
-                    t.getTaskStatus()
-                });
-            } else {
-                modelTask.addRow(new Object[]{
-                    t.getTaskId(),
-                    t.getTitle(),
-                    t.getDescription(),
-                    Validacoes.FormatDate(t.getStartDate()),
-                    Validacoes.FormatDate(t.getEndDate()), 
-                    t.getTaskStatus()
-                });
+        ArrayList<Task> tasks = new ArrayList<>(); //remove repeated
+        for (Task t : s.getRepositoryTasks().getTasks()) {
+
+            if (!tasks.contains(t) && (t.getAssignedTo() == s.getCurrentUser().getUserId() || t.getCreatedBy() == s.getCurrentUser().getUserId())) {
+                tasks.add(t);
+                if (t.getEndDate() == null) {
+                    modelTask.addRow(new Object[]{
+                        t.getTaskId(),
+                        t.getTitle(),
+                        t.getDescription(),
+                        Validacoes.FormatDate(t.getStartDate()),
+                        "",
+                        t.getTaskStatus()
+                    });
+                } else {
+                    modelTask.addRow(new Object[]{
+                        t.getTaskId(),
+                        t.getTitle(),
+                        t.getDescription(),
+                        Validacoes.FormatDate(t.getStartDate()),
+                        Validacoes.FormatDate(t.getEndDate()),
+                        t.getTaskStatus()
+                    });
+                }
             }
 
         }
@@ -81,14 +85,14 @@ public class ChangeTaskStatus extends javax.swing.JDialog {
                 SelectedTaskId = (int) tableTasks.getValueAt(tableTasks.getSelectedRow(), 0);
                 UpdateRadioButtonStatus();
                 EnableBtnUpdateTask();
-                 
+
             }
         });
 
     }
 
-    void UpdateRadioButtonStatus()    {
-         if (SelectedTaskId >= 0) {
+    void UpdateRadioButtonStatus() {
+        if (SelectedTaskId >= 0) {
             Task t = s.getRepositoryTasks().getTaskByTaskId(SelectedTaskId);
 
             //Select Status
@@ -119,7 +123,7 @@ public class ChangeTaskStatus extends javax.swing.JDialog {
         }
     }
 
-    void EnableBtnUpdateTask() {                              
+    void EnableBtnUpdateTask() {
         boolean b = true;
         if (tableTasks.getSelectedRow() == -1) {
             lbltableTaskWarning.setText("Selecione uma tarefa");
@@ -155,6 +159,7 @@ public class ChangeTaskStatus extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Criar Tarefa");
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnCreateTask.setBackground(new java.awt.Color(51, 110, 123));
         btnCreateTask.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
@@ -166,17 +171,19 @@ public class ChangeTaskStatus extends javax.swing.JDialog {
                 btnCreateTaskActionPerformed(evt);
             }
         });
+        getContentPane().add(btnCreateTask, new org.netbeans.lib.awtextra.AbsoluteConstraints(513, 645, 260, 46));
 
         btnCancel.setBackground(new java.awt.Color(51, 110, 123));
         btnCancel.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         btnCancel.setForeground(new java.awt.Color(255, 255, 255));
-        btnCancel.setText("Cancelar");
+        btnCancel.setText("Sair");
         btnCancel.setBorder(null);
         btnCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelActionPerformed(evt);
             }
         });
+        getContentPane().add(btnCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(791, 645, 200, 46));
 
         jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Selecionar Tarefa", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Calibri", 0, 18))); // NOI18N
         jPanel6.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
@@ -186,6 +193,7 @@ public class ChangeTaskStatus extends javax.swing.JDialog {
         jScrollPane3.setViewportView(tableTasks);
 
         lbltableTaskWarning.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
+        lbltableTaskWarning.setForeground(new java.awt.Color(255, 0, 0));
         lbltableTaskWarning.setText("lbltableTaskWarning");
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
@@ -195,7 +203,7 @@ public class ChangeTaskStatus extends javax.swing.JDialog {
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 949, Short.MAX_VALUE)
                     .addComponent(lbltableTaskWarning, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -208,6 +216,8 @@ public class ChangeTaskStatus extends javax.swing.JDialog {
                 .addComponent(lbltableTaskWarning, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
+
+        getContentPane().add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, 981, -1));
 
         jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Estado", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Calibri", 0, 18))); // NOI18N
         jPanel8.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
@@ -247,51 +257,20 @@ public class ChangeTaskStatus extends javax.swing.JDialog {
                 .addComponent(rbInProgress)
                 .addGap(4, 4, 4)
                 .addComponent(rbFinished)
-                .addContainerGap(490, Short.MAX_VALUE))
+                .addContainerGap(701, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
+                .addContainerGap(9, Short.MAX_VALUE)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(rbNotStarted)
                     .addComponent(rbInProgress)
                     .addComponent(rbFinished))
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(51, 222, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(btnCreateTask, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jPanel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap())))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCreateTask, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(23, 23, 23))
-        );
+        getContentPane().add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 557, 980, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -299,54 +278,47 @@ public class ChangeTaskStatus extends javax.swing.JDialog {
     String Description, TaskPriority pt,TaskStatus et,Date DataDeInicio*/
     private void btnCreateTaskActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateTaskActionPerformed
 
-        
-        if(SelectedStatus==TaskStatus.FINISHED)
-        {
+        if (SelectedStatus == TaskStatus.FINISHED) {
             Date d = new Date(System.currentTimeMillis());
             s.getRepositoryTasks().updateTaskStatusByIdandDate(SelectedTaskId, SelectedStatus, d);
             tableTasks.setValueAt(Validacoes.FormatDate(d), tableTasks.getSelectedRow(), 4);
             EnableRadioButtons(false);
-            
-        }
-        else            
-        {s.getRepositoryTasks().updateTaskStatusById(SelectedTaskId, SelectedStatus);
-        EnableRadioButtons(true);
-        
+
+        } else {
+            s.getRepositoryTasks().updateTaskStatusById(SelectedTaskId, SelectedStatus);
+            EnableRadioButtons(true);
+
         }
         modelTask.setValueAt(SelectedStatus, tableTasks.getSelectedRow(), 5);
     }//GEN-LAST:event_btnCreateTaskActionPerformed
 
-    void EnableRadioButtons(boolean e)
-    {
-         rbNotStarted.setEnabled(e);
-         rbInProgress.setEnabled(e);
-         rbFinished.setEnabled(e);
+    void EnableRadioButtons(boolean e) {
+        rbNotStarted.setEnabled(e);
+        rbInProgress.setEnabled(e);
+        rbFinished.setEnabled(e);
     }
-    
+
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnCancelActionPerformed
 
     private void rbNotStartedItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rbNotStartedItemStateChanged
-        if(rbNotStarted.isSelected())
-        {
+        if (rbNotStarted.isSelected()) {
             SelectedStatus = TaskStatus.NOTSTARTED;
             System.out.println(SelectedStatus);
         }
-    
+
     }//GEN-LAST:event_rbNotStartedItemStateChanged
 
     private void rbInProgressItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rbInProgressItemStateChanged
-        if(rbInProgress.isSelected())
-        {
+        if (rbInProgress.isSelected()) {
             SelectedStatus = TaskStatus.INPROGRESS;
             System.out.println(SelectedStatus);
         }
     }//GEN-LAST:event_rbInProgressItemStateChanged
 
     private void rbFinishedItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rbFinishedItemStateChanged
-        if(rbFinished.isSelected())
-        {
+        if (rbFinished.isSelected()) {
             SelectedStatus = TaskStatus.FINISHED;
             System.out.println(SelectedStatus);
         }

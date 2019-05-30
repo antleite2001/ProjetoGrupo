@@ -32,8 +32,8 @@ public class Validacoes {
         return dateFormat.format(date);
     }
 
-    public static void SetDialogProperties(JDialog dialog, Sistema s, int width, int height, String menuText) {
-        dialog.setSize(new Dimension(width, height));
+    public static void SetDialogProperties(JDialog dialog, Sistema s,  String menuText) {
+        //dialog.setSize(new Dimension(width, height));
         dialog.setResizable(false);
         dialog.setTitle(menuText + " - " + s.getCurrentUser().getUserName() + " (" + s.getCurrentUser().getEmail() + ")");
 

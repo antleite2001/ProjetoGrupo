@@ -6,35 +6,31 @@
 package Frontend;
 
 import Backend.*;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
-
-
 public class Login extends javax.swing.JDialog implements Serializable {
 
+      
     private Sistema s;
 
-    private ser x ;
-    
     public Login(java.awt.Frame parent, boolean modal, Sistema s) {
         super(parent, modal);
         initComponents();
         this.s = s;
-        x = new ser(5,6);
-        guardar("c:\\temp\\s.ser");
-        
         s.setCurrentUser(null);
-        this.tbEmail.setText("josealvaro@gmail.com");
-        this.tbPassword.setText("123456");
+         tbEmail.setText("");
+         tbPassword.setText("");
         EnablebtnLogin();
 
         //Events
+         
         tbEmail.getDocument().addDocumentListener(new DocumentListener() {
 
             @Override
@@ -71,25 +67,8 @@ public class Login extends javax.swing.JDialog implements Serializable {
             }
         });
     }
-//https://docs.oracle.com/en/java/javase/12/docs/api/java.base/java/io/Serializable.html
-    //java.io.NotSerializableException
-    public boolean guardar(String ficheiroDestino) {
-        boolean retValue = true;
 
-        try {
-            FileOutputStream fileOut = new FileOutputStream(ficheiroDestino);
-            ObjectOutputStream out = new ObjectOutputStream(fileOut);
-            out.writeObject(x);
-            out.close();
-            fileOut.close();
-        } catch (Exception i) {
-            retValue = false;
-            System.out.println("ERROR " + i);
-            JOptionPane.showMessageDialog(null, i.getMessage(), "NOME", JOptionPane.ERROR_MESSAGE);
-        }
-
-        return retValue;
-    }
+    
 
     void EnablebtnLogin() {
         boolean b = true;
@@ -144,7 +123,6 @@ public class Login extends javax.swing.JDialog implements Serializable {
         lblPasswordWarning = new javax.swing.JLabel();
         lblLoginDataWarning = new javax.swing.JLabel();
         lblEmailWarning = new javax.swing.JLabel();
-        btnSer = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Login");
@@ -283,20 +261,6 @@ public class Login extends javax.swing.JDialog implements Serializable {
         lblEmailWarning.setToolTipText("");
         jPanel1.add(lblEmailWarning, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 129, 300, 20));
 
-        btnSer.setBackground(new java.awt.Color(51, 110, 123));
-        btnSer.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
-        btnSer.setForeground(new java.awt.Color(255, 255, 255));
-        btnSer.setText("ser");
-        btnSer.setBorder(null);
-        btnSer.setBorderPainted(false);
-        btnSer.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnSer.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSerActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnSer, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 140, 120, 40));
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -332,10 +296,6 @@ public class Login extends javax.swing.JDialog implements Serializable {
         signUpUser.setVisible(true);
 
     }//GEN-LAST:event_lblRegisterNewAccountMouseClicked
-
-    private void btnSerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSerActionPerformed
-        guardar("c:\\temp\\s.ser");
-    }//GEN-LAST:event_btnSerActionPerformed
 
     /**
      * @param args the command line arguments
@@ -381,7 +341,6 @@ public class Login extends javax.swing.JDialog implements Serializable {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLogin;
-    private javax.swing.JButton btnSer;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

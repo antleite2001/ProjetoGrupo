@@ -1,8 +1,9 @@
 package Backend;
 
-import java.util.ArrayList;
-
-public class User {
+import java.io.Serializable;
+ 
+//ok
+public class User implements Serializable{
 
     private String UserName, UserEmail, UserPassword;
     private int UserId;

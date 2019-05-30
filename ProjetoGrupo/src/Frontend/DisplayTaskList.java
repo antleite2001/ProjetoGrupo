@@ -31,101 +31,114 @@ public class DisplayTaskList extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.s = s;
-        this.setTitle("Mostrar Lista de Tarefas - " + s.getCurrentUser().getUserName() + " (" + s.getCurrentUser().getEmail() + ")");
-        
+        Validacoes.SetDialogProperties(this, s, "Mostrar Lista de Tarefas");
+
         //set jtable selection to single row
         tableTaskList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        
+
         //prevent editing of jtable cells
         tableTaskList.setDefaultEditor(Object.class, null);
-        
+
         //create modelTaskList to handle columns and rows
-        modelTaskList = new DefaultTableModel();        
+        modelTaskList = new DefaultTableModel();
         modelTaskList.addColumn("Id da Lista de Tarefas");
         modelTaskList.addColumn("Título da Lista de Tarefas");
         modelTaskList.addColumn("Descrição da Lista de Tarefas");
         modelTaskList.addColumn("ID do Projeto");
         tableTaskList.setModel(modelTaskList);
-        
-        
-        for (TaskList tl : s.getRepositoryTaskLists().getListaDeTarefas())
-        {
-            if (tl.getOwnerId()==s.getCurrentUser().getUserId())
-            {
-                modelTaskList.addRow(new Object [] {tl.getTaskListId(), tl.getTitle(), tl.getDescription(), tl.getProjectId()});
+
+        for (TaskList tl : s.getRepositoryTaskLists().getListaDeTarefas()) {
+            if (tl.getOwnerId() == s.getCurrentUser().getUserId()) {
+                modelTaskList.addRow(new Object[]{tl.getTaskListId(), tl.getTitle(), tl.getDescription(), tl.getProjectId()});
             }
         }
-        
+
         //set jtable selection to single row
         tableProjectsAssigned.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        
+
         //prevent editing of jtable cells
         tableProjectsAssigned.setDefaultEditor(Object.class, null);
-        
+
         //create modelTaskList to handle columns and rows
-        modelProjectAssigned = new DefaultTableModel();        
+        modelProjectAssigned = new DefaultTableModel();
+        modelProjectAssigned.addColumn("Id do Projeto");
         modelProjectAssigned.addColumn("Título do Projeto");
         modelProjectAssigned.addColumn("Descrição do Projeto");
+        modelProjectAssigned.addColumn("Data de Início");
+        modelProjectAssigned.addColumn("Data de Fim");
+        //modelProjectAssigned.addColumn("Data de Início NotFormatted"); 
+        //modelProjectAssigned.addColumn("Data de Fim Not Formatted"); 
         tableProjectsAssigned.setModel(modelProjectAssigned);
-         
-        
-        
+
         //set jtable selection to single row
         tableTasksAssigned.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        
+
         //prevent editing of jtable cells
         tableTasksAssigned.setDefaultEditor(Object.class, null);
-        
+
         //create modelTaskList to handle columns and rows
-        modelTasksAssigned = new DefaultTableModel();        
+        modelTasksAssigned = new DefaultTableModel();
+        modelTasksAssigned.addColumn("Id da Tarefa");
         modelTasksAssigned.addColumn("Título da Tarefa");
         modelTasksAssigned.addColumn("Descrição da Tarefa");
+        modelTasksAssigned.addColumn("Prioridade");
+        modelTasksAssigned.addColumn("Estado");
+        modelTasksAssigned.addColumn("Data de Início");
+        modelTasksAssigned.addColumn("Data de Fim");
         tableTasksAssigned.setModel(modelTasksAssigned);
-         
-     
-        
-        //Listeners for events
-       
-        
 
-        
-        
+        /* */
+//Listeners for events
         //jtable selection change event
         tableTaskList.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-            
+
             @Override
             public void valueChanged(ListSelectionEvent event) {
                 modelProjectAssigned.setRowCount(0);
-            Project ProjectsById = s.getRepositoryProjects().getProjectsById((Integer)tableTaskList.getValueAt(tableTaskList.getSelectedRow(), 3));
-        
-        //Add rows to table with projects info
-        
-            modelProjectAssigned.addRow(new Object[]{
-                ProjectsById.getProjectTitle(),
-                ProjectsById.getProjectDescription()
-           
+                Project ProjectsById = s.getRepositoryProjects().getProjectsById((Integer) tableTaskList.getValueAt(tableTaskList.getSelectedRow(), 3));
 
-        });
-       
-       
+                //Add rows to table with projects info
+                modelProjectAssigned.addRow(new Object[]{
+                    ProjectsById.getProjectId(),
+                    ProjectsById.getProjectTitle(),
+                    ProjectsById.getProjectDescription(),
+                    Validacoes.FormatDate(ProjectsById.getStartDate()),
+                    Validacoes.FormatDate(ProjectsById.getEndDate())
+                });
+
+                
                 modelTasksAssigned.setRowCount(0);
                 int tasklistid = (Integer) tableTaskList.getValueAt(tableTaskList.getSelectedRow(), 0);
-                for (Task t : s.getRepositoryTasks().getTasks())
-                {
-                    if (tasklistid==t.getTaskListId())
-                {
-                    modelTasksAssigned.addRow(new Object[]{
-                        t.getTitle(),
-                        t.getDescription()
-            });
+                for (Task t : s.getRepositoryTasks().getTasks()) {
+                    if (tasklistid == t.getTaskListId()) {
 
-                }
+                        if (t.getEndDate() != null) {
+                            modelTasksAssigned.addRow(new Object[]{
+                                t.getTaskId(),
+                                t.getTitle(),
+                                t.getDescription(),
+                                t.getTaskPriority(),
+                                t.getTaskStatus(),
+                                Validacoes.FormatDate(t.getStartDate()),
+                                Validacoes.FormatDate(t.getEndDate())
+
+                            });
+                        } else {
+                            modelTasksAssigned.addRow(new Object[]{
+                                t.getTaskId(),
+                                t.getTitle(),
+                                t.getDescription(),
+                                t.getTaskPriority(),
+                                t.getTaskStatus(),
+                                Validacoes.FormatDate(t.getStartDate()),
+                                ""
+                            });
+                        }
+                    }
                 }
             }
         });
     }
-
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -161,7 +174,7 @@ public class DisplayTaskList extends javax.swing.JDialog {
                 btnCancelActionPerformed(evt);
             }
         });
-        getContentPane().add(btnCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 520, 200, 46));
+        getContentPane().add(btnCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 510, 200, 46));
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tarefas Associadas", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Calibri", 0, 18))); // NOI18N
 
@@ -175,7 +188,7 @@ public class DisplayTaskList extends javax.swing.JDialog {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 702, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 998, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -185,7 +198,7 @@ public class DisplayTaskList extends javax.swing.JDialog {
                 .addGap(0, 17, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 360, -1, 130));
+        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 360, 1030, 130));
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Lista de Tarefas", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Calibri", 0, 18))); // NOI18N
 
@@ -199,7 +212,7 @@ public class DisplayTaskList extends javax.swing.JDialog {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1000, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 998, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -209,7 +222,7 @@ public class DisplayTaskList extends javax.swing.JDialog {
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, 180));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 1030, 180));
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Projeto Associado", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Calibri", 0, 18))); // NOI18N
 
@@ -223,7 +236,7 @@ public class DisplayTaskList extends javax.swing.JDialog {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 702, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 998, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
@@ -233,7 +246,7 @@ public class DisplayTaskList extends javax.swing.JDialog {
                 .addGap(0, 18, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, -1, 130));
+        getContentPane().add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, 1030, 130));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -241,7 +254,7 @@ public class DisplayTaskList extends javax.swing.JDialog {
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnCancelActionPerformed
- 
+
     /**
      * @param args the command line arguments
      */

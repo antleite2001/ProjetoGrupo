@@ -20,13 +20,7 @@ public class SignUpUser extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.s = s;
-        this.setTitle("Registar Utilizador");
-
-        
-        tbUserName.setText("josealvaro");
-        tbEmail.setText("josealvaro@gmail.com");
-        tbPassword.setText("123456");
-        tbConfirmPassword.setText("123456");
+        this.setTitle("Registar Utilizador");         
         
         EnableBtnRegisterUser();
 
@@ -190,26 +184,32 @@ public class SignUpUser extends javax.swing.JDialog {
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Calibri", 0, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(102, 102, 102));
         jLabel1.setText("REGISTO");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(108, 11, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(51, 51, 51));
         jLabel2.setText("Nome:");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 73, 300, 22));
 
         jLabel3.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(51, 51, 51));
         jLabel3.setText("Email:");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 188, 300, 22));
 
         jLabel4.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(51, 51, 51));
         jLabel4.setText("Password:");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 303, 300, 22));
 
         jLabel5.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(51, 51, 51));
         jLabel5.setText("Confirmar Password:");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 418, 300, 22));
 
         tbUserName.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         tbUserName.setForeground(new java.awt.Color(102, 102, 102));
@@ -219,6 +219,7 @@ public class SignUpUser extends javax.swing.JDialog {
                 tbUserNameActionPerformed(evt);
             }
         });
+        jPanel1.add(tbUserName, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 95, 300, 40));
 
         tbEmail.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         tbEmail.setForeground(new java.awt.Color(102, 102, 102));
@@ -228,6 +229,7 @@ public class SignUpUser extends javax.swing.JDialog {
                 tbEmailActionPerformed(evt);
             }
         });
+        jPanel1.add(tbEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 211, 300, 40));
 
         btnRegisterUser.setBackground(new java.awt.Color(51, 110, 123));
         btnRegisterUser.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
@@ -239,6 +241,7 @@ public class SignUpUser extends javax.swing.JDialog {
                 btnRegisterUserActionPerformed(evt);
             }
         });
+        jPanel1.add(btnRegisterUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(66, 513, 200, 46));
 
         tbPassword.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         tbPassword.setForeground(new java.awt.Color(102, 102, 102));
@@ -248,6 +251,7 @@ public class SignUpUser extends javax.swing.JDialog {
                 tbPasswordActionPerformed(evt);
             }
         });
+        jPanel1.add(tbPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 325, 300, 40));
 
         tbConfirmPassword.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         tbConfirmPassword.setForeground(new java.awt.Color(102, 102, 102));
@@ -257,6 +261,7 @@ public class SignUpUser extends javax.swing.JDialog {
                 tbConfirmPasswordActionPerformed(evt);
             }
         });
+        jPanel1.add(tbConfirmPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 440, 300, 40));
 
         jPanel2.setBackground(new java.awt.Color(51, 110, 123));
         jPanel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -290,88 +295,27 @@ public class SignUpUser extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(376, 0, -1, 590));
+
         lblInsertEmailWarning.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
         lblInsertEmailWarning.setForeground(new java.awt.Color(255, 0, 0));
         lblInsertEmailWarning.setText("lblInsertEmailWarning");
+        jPanel1.add(lblInsertEmailWarning, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 251, 300, 20));
 
         lblInsertPasswordWarning.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
         lblInsertPasswordWarning.setForeground(new java.awt.Color(255, 0, 0));
         lblInsertPasswordWarning.setText("lblInsertPasswordWarning");
+        jPanel1.add(lblInsertPasswordWarning, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 365, 300, 20));
 
         lblInsertPasswordConfirmationWarning.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
         lblInsertPasswordConfirmationWarning.setForeground(new java.awt.Color(255, 0, 0));
         lblInsertPasswordConfirmationWarning.setText("lblInsertPasswordConfirmationWarning");
+        jPanel1.add(lblInsertPasswordConfirmationWarning, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 480, 300, 20));
 
         lblInsertNameWarning.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
         lblInsertNameWarning.setForeground(new java.awt.Color(255, 0, 0));
         lblInsertNameWarning.setText("lblInsertNameWarning");
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(108, 108, 108)
-                        .addComponent(jLabel1))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tbUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tbEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tbPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblInsertPasswordConfirmationWarning, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblInsertPasswordWarning, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblInsertEmailWarning, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblInsertNameWarning, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
-                                .addComponent(tbConfirmPassword, javax.swing.GroupLayout.Alignment.LEADING))
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(66, 66, 66)
-                        .addComponent(btnRegisterUser, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(47, 47, 47)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(tbUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(lblInsertNameWarning, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(1, 1, 1)
-                .addComponent(tbEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(lblInsertEmailWarning, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(tbPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(lblInsertPasswordWarning, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(tbConfirmPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(lblInsertPasswordConfirmationWarning, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
-                .addComponent(btnRegisterUser)
-                .addContainerGap())
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+        jPanel1.add(lblInsertNameWarning, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 135, 300, 20));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

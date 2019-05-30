@@ -5,7 +5,10 @@
  */
 package Backend;
 
-public class UserProjectsAssociation {
+import java.io.Serializable;
+
+//OK
+public class UserProjectsAssociation implements Serializable{
 
     private int UserProjectAssociationId, UserId, ProjectId, ProjectOwner;
 

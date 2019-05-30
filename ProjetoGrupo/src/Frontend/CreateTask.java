@@ -26,7 +26,7 @@ public class CreateTask extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.s = s;
-        Validacoes.SetDialogProperties(this, s, 985, 720, "Criar Tarefa");
+        Validacoes.SetDialogProperties(this, s,  "Criar Tarefa");
         Validacoes.FormatCalendar(calStartDate);
         //set jtable selection to single row
         tableUsers.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -273,7 +273,7 @@ public class CreateTask extends javax.swing.JDialog {
         btnCancel.setBackground(new java.awt.Color(51, 110, 123));
         btnCancel.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         btnCancel.setForeground(new java.awt.Color(255, 255, 255));
-        btnCancel.setText("Cancelar");
+        btnCancel.setText("Sair");
         btnCancel.setBorder(null);
         btnCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

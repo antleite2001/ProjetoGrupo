@@ -1,9 +1,10 @@
 package Backend;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import javax.swing.*;
 
-public class RepositoryUsers {
+public class RepositoryUsers implements Serializable{
 
     private ArrayList<User> Users;
 

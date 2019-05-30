@@ -1,8 +1,9 @@
 package Backend;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Task {
+public class Task implements Serializable{
 
     private int createdBy;
     private int assignedTo;

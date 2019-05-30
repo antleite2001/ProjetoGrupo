@@ -36,7 +36,7 @@ public class ChangeTask extends javax.swing.JDialog {
         lbltableTaskWarning.setText("");
         lbltableUsersWarning.setText("");
         
-        Validacoes.SetDialogProperties(this, s, 970, 820, "Atualizar Tarefa");
+        Validacoes.SetDialogProperties(this, s, "Atualizar Tarefa");
 
         rbHighPriority.setSelected(false);
         rbMediumPriority.setSelected(false);
