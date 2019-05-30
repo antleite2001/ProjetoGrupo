@@ -10,17 +10,25 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+
+
 
 public class Login extends javax.swing.JDialog implements Serializable {
 
     private Sistema s;
 
+    private ser x ;
+    
     public Login(java.awt.Frame parent, boolean modal, Sistema s) {
         super(parent, modal);
         initComponents();
         this.s = s;
+        x = new ser(5,6);
+        guardar("c:\\temp\\s.ser");
+        
         s.setCurrentUser(null);
         this.tbEmail.setText("josealvaro@gmail.com");
         this.tbPassword.setText("123456");
@@ -63,19 +71,21 @@ public class Login extends javax.swing.JDialog implements Serializable {
             }
         });
     }
-
+//https://docs.oracle.com/en/java/javase/12/docs/api/java.base/java/io/Serializable.html
+    //java.io.NotSerializableException
     public boolean guardar(String ficheiroDestino) {
         boolean retValue = true;
 
         try {
             FileOutputStream fileOut = new FileOutputStream(ficheiroDestino);
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
-//            out.writeObject(this);
+            out.writeObject(x);
             out.close();
             fileOut.close();
-        } catch (IOException i) {
+        } catch (Exception i) {
             retValue = false;
-            //JOptionPane.showMessageDialog(null, i.getMessage(), NOME, JOptionPane.ERROR_MESSAGE);
+            System.out.println("ERROR " + i);
+            JOptionPane.showMessageDialog(null, i.getMessage(), "NOME", JOptionPane.ERROR_MESSAGE);
         }
 
         return retValue;
@@ -317,11 +327,9 @@ public class Login extends javax.swing.JDialog implements Serializable {
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void lblRegisterNewAccountMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblRegisterNewAccountMouseClicked
-        //this.setVisible(false); //disposes form DO NOT USE
         SignUpUser signUpUser = new SignUpUser(null, true, s);
         signUpUser.setLocationRelativeTo(null);
         signUpUser.setVisible(true);
-        //this.setVisible(true);
 
     }//GEN-LAST:event_lblRegisterNewAccountMouseClicked
 

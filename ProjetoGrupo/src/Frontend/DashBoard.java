@@ -65,7 +65,6 @@ public class DashBoard extends javax.swing.JDialog {
                 pa.add(p);
             }
         }
-       ArrayList <Task> t1 = new ArrayList <> ();
         for (Project p : pa)
         {
             for (TaskList tl1 : s.getRepositoryTaskLists().getListaDeTarefas())
@@ -74,15 +73,11 @@ public class DashBoard extends javax.swing.JDialog {
                 {
                     for (Task t : s.getRepositoryTasks().getTasks())
                     {
-                        if (t.getTaskStatus()==TaskStatus.INPROGRESS)
+                        if (t.getTaskListId()==tl1.getTaskListId() && t.getTaskStatus()==TaskStatus.INPROGRESS)
                         {
-                            if (!t1.contains(t))
-                            {
-                                t1.add(t);
-                            modelTask.addRow(new Object [] {t.getTaskId(), t.getTitle(), t.getDescription(), t.getTaskPriority(), t.getTaskStatus(), 
+                            modelTask.addRow(new Object [] {t.getTaskId(), t.getTitle(), 
+                                t.getDescription(), t.getTaskPriority(), t.getTaskStatus(), 
                                Validacoes.FormatDate( t.getStartDate()), p.getProjectTitle()});
-                            
-                            }
                         }
                     }
                 }
