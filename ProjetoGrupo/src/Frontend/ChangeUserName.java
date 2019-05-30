@@ -86,12 +86,10 @@ public class ChangeUserName extends javax.swing.JDialog {
         setTitle("Alterar Nome de Utilizador");
         setBackground(new java.awt.Color(255, 255, 255));
         setResizable(false);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(51, 51, 51));
         jLabel2.setText("Nome:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, 300, 22));
 
         tbUserName.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         tbUserName.setForeground(new java.awt.Color(102, 102, 102));
@@ -101,12 +99,10 @@ public class ChangeUserName extends javax.swing.JDialog {
                 tbUserNameActionPerformed(evt);
             }
         });
-        getContentPane().add(tbUserName, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 39, 418, 30));
 
         lblInsertNameWarning.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
         lblInsertNameWarning.setForeground(new java.awt.Color(255, 0, 0));
         lblInsertNameWarning.setText("lblInsertNameWarning");
-        getContentPane().add(lblInsertNameWarning, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 75, 300, 20));
 
         btnChangeUserName.setBackground(new java.awt.Color(51, 110, 123));
         btnChangeUserName.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
@@ -118,7 +114,6 @@ public class ChangeUserName extends javax.swing.JDialog {
                 btnChangeUserNameActionPerformed(evt);
             }
         });
-        getContentPane().add(btnChangeUserName, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 117, 200, 46));
 
         btnExit.setBackground(new java.awt.Color(51, 110, 123));
         btnExit.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
@@ -130,7 +125,38 @@ public class ChangeUserName extends javax.swing.JDialog {
                 btnExitActionPerformed(evt);
             }
         });
-        getContentPane().add(btnExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(228, 117, 200, 46));
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblInsertNameWarning, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnChangeUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(5, 5, 5)
+                        .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tbUserName))
+                .addGap(20, 20, 20))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(6, 6, 6)
+                .addComponent(tbUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(5, 5, 5)
+                .addComponent(lblInsertNameWarning, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnChangeUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20))
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

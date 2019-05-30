@@ -58,7 +58,7 @@ public class ChangeUserEmail extends javax.swing.JDialog {
          
         //Check Email is valid 
         if (Validacoes.validaEmail(tbEmail.getText())) {
-            if (s.getUsersRepository().UserExists(tbEmail.getText())) {
+            if (s.getUsersRepository().EmailExists(tbEmail.getText())) {
                 lblInsertEmailWarning.setText("Este Email já está registado");
                 b = false;
             } else {
@@ -93,12 +93,10 @@ public class ChangeUserEmail extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Alterar Email de Utilizador");
         setResizable(false);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel3.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(51, 51, 51));
         jLabel3.setText("Email:");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, 300, 22));
 
         tbEmail.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         tbEmail.setForeground(new java.awt.Color(102, 102, 102));
@@ -108,12 +106,10 @@ public class ChangeUserEmail extends javax.swing.JDialog {
                 tbEmailActionPerformed(evt);
             }
         });
-        getContentPane().add(tbEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 34, 410, 40));
 
         lblInsertEmailWarning.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
         lblInsertEmailWarning.setForeground(new java.awt.Color(255, 0, 0));
         lblInsertEmailWarning.setText("lblInsertEmailWarning");
-        getContentPane().add(lblInsertEmailWarning, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 74, 300, 20));
 
         btnChangeUserEmail.setBackground(new java.awt.Color(51, 110, 123));
         btnChangeUserEmail.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
@@ -125,7 +121,6 @@ public class ChangeUserEmail extends javax.swing.JDialog {
                 btnChangeUserEmailActionPerformed(evt);
             }
         });
-        getContentPane().add(btnChangeUserEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 105, 200, 46));
 
         btnExit.setBackground(new java.awt.Color(51, 110, 123));
         btnExit.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
@@ -137,7 +132,38 @@ public class ChangeUserEmail extends javax.swing.JDialog {
                 btnExitActionPerformed(evt);
             }
         });
-        getContentPane().add(btnExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 105, 200, 46));
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tbEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblInsertEmailWarning, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnChangeUserEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(5, 5, 5)
+                        .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(20, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(1, 1, 1)
+                .addComponent(tbEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblInsertEmailWarning, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnChangeUserEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20))
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

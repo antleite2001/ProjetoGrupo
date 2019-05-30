@@ -8,10 +8,7 @@ package Backend;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-/**
- *
- * @author VarianInstaller
- */
+ 
 public class RepositoryTaskLists implements Serializable{
     int nextTaskListid = 0;  
     private ArrayList<TaskList> ListaDeTarefas;

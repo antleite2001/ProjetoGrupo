@@ -121,7 +121,7 @@ public class SignUpUser extends javax.swing.JDialog {
 
         //Check Email is valid 
         if (Validacoes.validaEmail(tbEmail.getText())) {
-            if (s.getUsersRepository().UserExists(tbEmail.getText())) {
+            if (s.getUsersRepository().EmailExists(tbEmail.getText())) {
                 lblInsertEmailWarning.setText("Este Email já está registado");
                 b = false;
             } else {

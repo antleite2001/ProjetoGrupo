@@ -3,6 +3,7 @@ package Frontend;
 import Backend.*;
 import java.util.ArrayList;
 import java.util.Date;
+import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
@@ -290,6 +291,8 @@ public class ChangeTaskStatus extends javax.swing.JDialog {
 
         }
         modelTask.setValueAt(SelectedStatus, tableTasks.getSelectedRow(), 5);
+        JOptionPane.showMessageDialog(null, "O estado da Tarefa foi alterado com sucesso!");
+        this.dispose ();
     }//GEN-LAST:event_btnCreateTaskActionPerformed
 
     void EnableRadioButtons(boolean e) {

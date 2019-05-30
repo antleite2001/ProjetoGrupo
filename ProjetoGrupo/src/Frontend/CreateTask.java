@@ -12,10 +12,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author VarianInstaller
- */
+ 
 public class CreateTask extends javax.swing.JDialog {
 
     Sistema s;
@@ -282,7 +279,7 @@ public class CreateTask extends javax.swing.JDialog {
         });
         getContentPane().add(btnCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 710, 200, 46));
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Atribuir Tarefa ao Utilizador", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Calibri", 0, 18))); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Prioridade", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Calibri", 0, 18))); // NOI18N
 
         btngrpPriority.add(rbLowPriority);
         rbLowPriority.setText("Baixa");
@@ -418,7 +415,7 @@ public class CreateTask extends javax.swing.JDialog {
 
         getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(496, 10, -1, 110));
 
-        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Atribuir Tarefa ao Utilizador", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Calibri", 0, 18))); // NOI18N
+        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Titulo", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Calibri", 0, 18))); // NOI18N
 
         tbTaskTitle.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         tbTaskTitle.setPreferredSize(new java.awt.Dimension(30, 20));

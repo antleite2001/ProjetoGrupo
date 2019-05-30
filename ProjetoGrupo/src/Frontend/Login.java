@@ -17,7 +17,6 @@ import javax.swing.event.DocumentListener;
 
 public class Login extends javax.swing.JDialog implements Serializable {
 
-      
     private Sistema s;
 
     public Login(java.awt.Frame parent, boolean modal, Sistema s) {
@@ -25,12 +24,11 @@ public class Login extends javax.swing.JDialog implements Serializable {
         initComponents();
         this.s = s;
         s.setCurrentUser(null);
-         tbEmail.setText("");
-         tbPassword.setText("");
+        tbEmail.setText("");
+        tbPassword.setText("");
         EnablebtnLogin();
 
         //Events
-         
         tbEmail.getDocument().addDocumentListener(new DocumentListener() {
 
             @Override
@@ -68,14 +66,9 @@ public class Login extends javax.swing.JDialog implements Serializable {
         });
     }
 
-    
-
     void EnablebtnLogin() {
-        boolean b = true;
-
         lblLoginDataWarning.setText("");
-
-        //Email
+        boolean b = true;
         if (tbEmail.getText().isBlank()) {
             b = false;
             lblEmailWarning.setText("Introduza um Email");
@@ -83,18 +76,9 @@ public class Login extends javax.swing.JDialog implements Serializable {
             lblEmailWarning.setText("");
         }
 
-        //Password blank
         if (tbPassword.getText().isBlank()) {
             b = false;
-            lblPasswordWarning.setText("Introduza uma Password (Mínimo 6 caractéres)");
-        } else {
-            lblPasswordWarning.setText("");
-        }
-
-        //Password len
-        if (tbPassword.getText().length() < 6) {
-            b = false;
-            lblPasswordWarning.setText("Introduza uma Password (Mínimo 6 caractéres)");
+            lblPasswordWarning.setText("Introduza a Password");
         } else {
             lblPasswordWarning.setText("");
         }
@@ -278,16 +262,19 @@ public class Login extends javax.swing.JDialog implements Serializable {
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         s.setCurrentUser(null);
         for (User user : s.getUsersRepository().getUsers()) {
-            if (tbEmail.getText().toUpperCase().equals(user.getEmail().toUpperCase())) {
-                if (tbPassword.getText().equals(user.getUserPassword())) {
+            if (tbEmail.getText().toUpperCase().equals(user.getEmail().toUpperCase())&& 
+                    tbPassword.getText().equals(user.getUserPassword())) {
                     s.setCurrentUser(user);
                     tbEmail.setText("");
                     tbPassword.setText("");
                     this.dispose();
+                } else {
+                    lblLoginDataWarning.setText("Dados inválidos");
                 }
-            }
+
+             
         }
-        lblLoginDataWarning.setText("Dados de Login Inválidos");
+
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void lblRegisterNewAccountMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblRegisterNewAccountMouseClicked

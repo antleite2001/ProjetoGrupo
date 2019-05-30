@@ -23,8 +23,8 @@ public class Sistema  implements Serializable{
         this.repositoryTasks = new RepositoryTasks();
         this.RepositoryUserProjectsAssociation = new RepositoryUserProjectsAssociation();
 
-        /*
-        //Repository Users
+        
+       /* //Repository Users
         int JoseAlvaro = this.reporitoryUsers.addUser("JoseAlvaro", "JoseAlvaro@gmail.com", "123456");
         int AntonioSilva = this.reporitoryUsers.addUser("AntonioSilva", "AntonioSilva@gmail.com", "123456");
         int ManuelSilva = this.reporitoryUsers.addUser("ManuelSilva", "ManuelSilva@gmail.com", "123456");

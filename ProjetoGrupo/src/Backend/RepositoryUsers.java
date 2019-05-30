@@ -15,7 +15,7 @@ public class RepositoryUsers implements Serializable{
         this.Users = new ArrayList<User>();
     }
 
-    public boolean UserExists(String UserEmail) {
+    public boolean EmailExists(String UserEmail) {
         if (UserEmail.isBlank()) {
             return false;
         } else {
@@ -28,6 +28,19 @@ public class RepositoryUsers implements Serializable{
         return false;
     }
 
+    public boolean PasswordOk(String Password) {
+        if (Password.isBlank()) {
+            return false;
+        } else {
+            for (User u : Users) {
+                if (u.getUserPassword().equals(Password)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    
     //modificadores
     //adicionar utilizador caso este ainda nao exista na lista de utilizadores
     public int addUser(String nome, String email, String password) {
